@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Localizame.vista
 {
-    public partial class prueba : Form
+    public partial class lasanchez : Form
     {
-        public prueba()
+        public lasanchez()
         {
             InitializeComponent();
         }
