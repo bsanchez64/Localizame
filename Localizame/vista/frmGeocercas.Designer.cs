@@ -44,10 +44,11 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(171, 35);
+            ClientSize = new Size(889, 506);
             Controls.Add(label1);
             Name = "frmGeocercas";
             Text = "frmGeocercas";
+            Load += frmGeocercas_Load;
             ResumeLayout(false);
             PerformLayout();
         }
