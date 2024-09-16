@@ -22,20 +22,20 @@ namespace Localizame.vista
         SqlCommand cmd;
         DataTable dt;
         string user, password;
+        public int xClic, yClic;
         public frmLogin()
         {
             InitializeComponent();
+            this.AcceptButton = btnSesionOn;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void btnSesionOn_Click(object sender, EventArgs e)
         {
-            frmMenu frmMenu = new frmMenu();
-
             user = txtUsuario.Text;
             password = txtPassword.Text;
 
@@ -63,16 +63,16 @@ namespace Localizame.vista
                         {
                             string usernameDb = reader["username"].ToString();
                             string passwordDb = reader["password"].ToString();
+                            string nombreDb = reader["nombre"].ToString();
 
                             string passwordLogin = funciones_generales.GetMD5(password);
 
                             if (passwordDb == passwordLogin)
                             {
-                                MessageBox.Show("Bienvenido, " + usernameDb);
-                                frmMenu.Show();
-                                this.Close();
-
-                         
+                                funciones_generales.setName(nombreDb);
+                                //MessageBox.Show("Bienvenido, " + nombreDb);
+                                this.Hide();
+                                new frmMenu().ShowDialog();
 
                             }
                             else
@@ -100,6 +100,21 @@ namespace Localizame.vista
         private void frmLogin_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmLogin_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                xClic = e.X; yClic = e.Y;
+
+            }
+            else
+            {
+                this.Left = this.Left + (e.X);
+                this.Top = this.Top + (e.Y);
+
+            }
         }
     }
 }
