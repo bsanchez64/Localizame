@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Localizame.controlador;
 using System.Security.Cryptography;
+using Localizame.modelo;
 
 namespace Localizame.vista
 {
     public partial class frmLogin : Form
     {
+        funciones_generales funGen = new funciones_generales();
         connection cn = new connection();
         SqlDataAdapter da;
         SqlCommand cmd;
@@ -25,17 +27,6 @@ namespace Localizame.vista
             InitializeComponent();
         }
 
-        public static string GetMD5(string str)
-        {
-            MD5 md5 = MD5CryptoServiceProvider.Create();
-            ASCIIEncoding encoding = new ASCIIEncoding();
-            byte[] stream = null;
-            StringBuilder sb = new StringBuilder();
-            stream = md5.ComputeHash(encoding.GetBytes(str));
-            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
-            return sb.ToString();
-        }
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -44,7 +35,7 @@ namespace Localizame.vista
         private void btnSesionOn_Click(object sender, EventArgs e)
         {
             frmMenu frmMenu = new frmMenu();
-            
+
             user = txtUsuario.Text;
             password = txtPassword.Text;
 
@@ -58,28 +49,31 @@ namespace Localizame.vista
                 {
                     MessageBox.Show("Debes ingresar la contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else {
+                else
+                {
 
                     cmd = new SqlCommand("SELECT * FROM Users WHERE username = @user", cn.AbrirConexion());
                     cmd.Parameters.AddWithValue("@user", user);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows) 
+                    if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
                             string usernameDb = reader["username"].ToString();
                             string passwordDb = reader["password"].ToString();
 
-                            string passwordLogin = GetMD5(password);
+                            string passwordLogin = funciones_generales.GetMD5(password);
 
                             if (passwordDb == passwordLogin)
                             {
                                 MessageBox.Show("Bienvenido, " + usernameDb);
                                 frmMenu.Show();
                                 this.Close();
-                                
+
+                         
+
                             }
                             else
                             {
@@ -100,6 +94,11 @@ namespace Localizame.vista
                 }
             }
 
+
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
 
         }
     }

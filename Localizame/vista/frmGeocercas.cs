@@ -16,5 +16,10 @@ namespace Localizame.vista
         {
             InitializeComponent();
         }
+
+        private void frmGeocercas_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
