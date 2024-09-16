@@ -34,18 +34,20 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Font = new Font("Segoe UI", 30F);
+            label1.Location = new Point(10, 7);
             label1.Name = "label1";
-            label1.Size = new Size(147, 20);
+            label1.Size = new Size(734, 54);
             label1.TabIndex = 0;
-            label1.Text = "Dame click de nuevo";
+            label1.Text = "A BRANDON LE GUSTAN LOS HOMBRES";
             // 
             // frmGeocercas
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(889, 506);
+            ClientSize = new Size(778, 380);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmGeocercas";
             Text = "frmGeocercas";
             Load += frmGeocercas_Load;
