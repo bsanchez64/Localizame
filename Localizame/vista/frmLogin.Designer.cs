@@ -94,7 +94,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.login;
-            BackgroundImageLayout = ImageLayout.Zoom;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(565, 753);
             Controls.Add(btnCerrar);
             Controls.Add(btnSesionOn);
@@ -104,6 +104,7 @@
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Iniciar Sesion";
+            Load += frmLogin_Load;
             ResumeLayout(false);
             PerformLayout();
         }
