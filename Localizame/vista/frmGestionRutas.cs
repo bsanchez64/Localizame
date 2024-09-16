@@ -54,6 +54,17 @@ namespace Localizame.vista
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 9;
             gMapControl1.AutoScroll = true;
+
+            markerOverlay = new GMapOverlay("Marcador");
+            marker = new GMarkerGoogle(new PointLatLng(LatInicial, LngInicial), GMarkerGoogleType.green);
+            markerOverlay.Markers.Add(marker);
+
+            //tool tip al marcador
+            marker.ToolTipMode = MarkerTooltipMode.Always;
+            marker.ToolTipText = string.Format("Ubicacion: \n latitud: {0} \n Longitud: {1}", LatInicial, LngInicial);
+
+            //agregare overlay al mapa
+            gMapControl1.Overlays.Add(markerOverlay);
         }
 
         private void frmGestionRutas_MouseMove(object sender, MouseEventArgs e)
