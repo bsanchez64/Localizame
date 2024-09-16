@@ -9,15 +9,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using GMap.NET;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+
 namespace Localizame.vista
 {
 
     public partial class frmGestionRutas : Form
     {
+        //marcadores de google
+        GMarkerGoogle marker;
+        GMapOverlay markerOverlay;
+
+        int filaSeleccionada = 0;
+        double LatInicial = 6.1711964;
+        double LngInicial = -75.6514894;
+
         public int xClic, yClic;
         public frmGestionRutas()
         {
             InitializeComponent();
+
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -32,7 +46,14 @@ namespace Localizame.vista
 
         private void frmGestionRutas_Load(object sender, EventArgs e)
         {
-
+            gMapControl1.DragButton = MouseButtons.Left;
+            gMapControl1.CanDragMap = true;
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+            gMapControl1.Position = new PointLatLng(LatInicial, LngInicial);
+            gMapControl1.MinZoom = 3;
+            gMapControl1.MaxZoom = 24;
+            gMapControl1.Zoom = 9;
+            gMapControl1.AutoScroll = true;
         }
 
         private void frmGestionRutas_MouseMove(object sender, MouseEventArgs e)
@@ -50,6 +71,6 @@ namespace Localizame.vista
             }
         }
 
-        
+       
     }
 }
