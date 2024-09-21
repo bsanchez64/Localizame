@@ -44,10 +44,9 @@
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(664, 11);
-            btnCerrar.Margin = new Padding(3, 2, 3, 2);
+            btnCerrar.Location = new Point(662, 12);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(21, 20);
+            btnCerrar.Size = new Size(24, 27);
             btnCerrar.TabIndex = 4;
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
@@ -56,9 +55,10 @@
             // 
             pnlGestionSoft.BackColor = Color.Transparent;
             pnlGestionSoft.Cursor = Cursors.Hand;
-            pnlGestionSoft.Location = new Point(29, 159);
+            pnlGestionSoft.Location = new Point(33, 158);
+            pnlGestionSoft.Margin = new Padding(3, 4, 3, 4);
             pnlGestionSoft.Name = "pnlGestionSoft";
-            pnlGestionSoft.Size = new Size(145, 217);
+            pnlGestionSoft.Size = new Size(139, 216);
             pnlGestionSoft.TabIndex = 5;
             pnlGestionSoft.MouseLeave += pnlGestionSoft_MouseLeave;
             pnlGestionSoft.MouseHover += pnlGestionSoft_MouseHover;
@@ -67,9 +67,10 @@
             // 
             pnlGestionRuta.BackColor = Color.Transparent;
             pnlGestionRuta.Cursor = Cursors.Hand;
-            pnlGestionRuta.Location = new Point(201, 159);
+            pnlGestionRuta.Location = new Point(202, 158);
+            pnlGestionRuta.Margin = new Padding(3, 4, 3, 4);
             pnlGestionRuta.Name = "pnlGestionRuta";
-            pnlGestionRuta.Size = new Size(145, 217);
+            pnlGestionRuta.Size = new Size(143, 216);
             pnlGestionRuta.TabIndex = 6;
             pnlGestionRuta.MouseClick += pnlGestionRuta_MouseClick;
             pnlGestionRuta.MouseLeave += pnlGestionRuta_MouseLeave;
@@ -79,9 +80,10 @@
             // 
             pnlGeocercas.BackColor = Color.Transparent;
             pnlGeocercas.Cursor = Cursors.Hand;
-            pnlGeocercas.Location = new Point(368, 159);
+            pnlGeocercas.Location = new Point(373, 158);
+            pnlGeocercas.Margin = new Padding(3, 4, 3, 4);
             pnlGeocercas.Name = "pnlGeocercas";
-            pnlGeocercas.Size = new Size(145, 217);
+            pnlGeocercas.Size = new Size(144, 216);
             pnlGeocercas.TabIndex = 6;
             pnlGeocercas.MouseClick += pnlGeocercas_MouseClick;
             pnlGeocercas.MouseLeave += pnlGeocercas_MouseLeave;
@@ -91,9 +93,10 @@
             // 
             pnlInformes.BackColor = Color.Transparent;
             pnlInformes.Cursor = Cursors.Hand;
-            pnlInformes.Location = new Point(531, 159);
+            pnlInformes.Location = new Point(534, 158);
+            pnlInformes.Margin = new Padding(3, 4, 3, 4);
             pnlInformes.Name = "pnlInformes";
-            pnlInformes.Size = new Size(145, 217);
+            pnlInformes.Size = new Size(140, 216);
             pnlInformes.TabIndex = 7;
             pnlInformes.MouseLeave += pnlInformes_MouseLeave;
             pnlInformes.MouseHover += pnlInformes_MouseHover;
@@ -104,9 +107,9 @@
             lblBienvenido.BackColor = Color.Transparent;
             lblBienvenido.Font = new Font("Segoe UI", 16F);
             lblBienvenido.ForeColor = Color.White;
-            lblBienvenido.Location = new Point(29, 95);
+            lblBienvenido.Location = new Point(33, 93);
             lblBienvenido.Name = "lblBienvenido";
-            lblBienvenido.Size = new Size(121, 30);
+            lblBienvenido.Size = new Size(149, 37);
             lblBienvenido.TabIndex = 8;
             lblBienvenido.Text = "Bienvenido";
             // 
@@ -116,18 +119,19 @@
             pnlUser.BackgroundImage = Properties.Resources.user;
             pnlUser.BackgroundImageLayout = ImageLayout.Zoom;
             pnlUser.Cursor = Cursors.Hand;
-            pnlUser.Location = new Point(620, 11);
+            pnlUser.Location = new Point(612, 13);
+            pnlUser.Margin = new Padding(3, 4, 3, 4);
             pnlUser.Name = "pnlUser";
-            pnlUser.Size = new Size(38, 20);
+            pnlUser.Size = new Size(43, 27);
             pnlUser.TabIndex = 9;
             pnlUser.Tag = "";
             // 
             // frmMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(697, 399);
+            BackgroundImageLayout = ImageLayout.None;
+            ClientSize = new Size(700, 400);
             Controls.Add(pnlUser);
             Controls.Add(lblBienvenido);
             Controls.Add(pnlInformes);
@@ -137,7 +141,6 @@
             Controls.Add(btnCerrar);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             Name = "frmMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmMenu";

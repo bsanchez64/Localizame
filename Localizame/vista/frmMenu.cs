@@ -17,6 +17,7 @@ namespace Localizame.vista
         public frmMenu()
         {
             InitializeComponent();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             lblBienvenido.Text = "Bienvenido, " + funciones_generales.getName();
         }
 
@@ -96,6 +97,6 @@ namespace Localizame.vista
             pnlInformes.BackColor = Color.FromArgb(0, 0, 50, 231);
         }
 
-        
+       
     }
 }
