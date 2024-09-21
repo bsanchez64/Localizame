@@ -83,7 +83,7 @@
             pnlGeocercas.Location = new Point(373, 158);
             pnlGeocercas.Margin = new Padding(3, 4, 3, 4);
             pnlGeocercas.Name = "pnlGeocercas";
-            pnlGeocercas.Size = new Size(136, 216);
+            pnlGeocercas.Size = new Size(144, 216);
             pnlGeocercas.TabIndex = 6;
             pnlGeocercas.MouseClick += pnlGeocercas_MouseClick;
             pnlGeocercas.MouseLeave += pnlGeocercas_MouseLeave;
