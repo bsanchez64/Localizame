@@ -111,6 +111,7 @@
             // cmbVehiculo
             // 
             cmbVehiculo.FormattingEnabled = true;
+            cmbVehiculo.Items.AddRange(new object[] { "Selecciona una opcion" });
             cmbVehiculo.Location = new Point(12, 67);
             cmbVehiculo.Name = "cmbVehiculo";
             cmbVehiculo.Size = new Size(217, 23);
@@ -136,7 +137,7 @@
             label3.Name = "label3";
             label3.Size = new Size(72, 15);
             label3.TabIndex = 11;
-            label3.Text = "Fecha Inicial";
+            label3.Text = "Fecha inicial";
             // 
             // label4
             // 
@@ -145,22 +146,24 @@
             label4.ForeColor = Color.White;
             label4.Location = new Point(500, 46);
             label4.Name = "label4";
-            label4.Size = new Size(66, 15);
+            label4.Size = new Size(64, 15);
             label4.TabIndex = 12;
-            label4.Text = "Fecha Final";
+            label4.Text = "Fecha final";
             // 
             // dtpFechaInicial
             // 
+            dtpFechaInicial.Format = DateTimePickerFormat.Short;
             dtpFechaInicial.Location = new Point(254, 67);
             dtpFechaInicial.Name = "dtpFechaInicial";
-            dtpFechaInicial.Size = new Size(231, 23);
+            dtpFechaInicial.Size = new Size(219, 23);
             dtpFechaInicial.TabIndex = 13;
             // 
             // dtpFechaFinal
             // 
+            dtpFechaFinal.Format = DateTimePickerFormat.Short;
             dtpFechaFinal.Location = new Point(500, 67);
             dtpFechaFinal.Name = "dtpFechaFinal";
-            dtpFechaFinal.Size = new Size(253, 23);
+            dtpFechaFinal.Size = new Size(248, 23);
             dtpFechaFinal.TabIndex = 14;
             // 
             // btnConsultar
@@ -174,6 +177,7 @@
             btnConsultar.TabIndex = 15;
             btnConsultar.Text = "Consultar";
             btnConsultar.UseVisualStyleBackColor = false;
+            btnConsultar.Click += btnConsultar_Click;
             // 
             // btnUbicacionUltima
             // 
@@ -186,6 +190,7 @@
             btnUbicacionUltima.TabIndex = 16;
             btnUbicacionUltima.Text = "Última Ubicación";
             btnUbicacionUltima.UseVisualStyleBackColor = false;
+            btnUbicacionUltima.Click += btnUbicacionUltima_Click;
             // 
             // frmGestionRutas
             // 
