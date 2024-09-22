@@ -34,12 +34,19 @@ namespace Localizame.vista
 
         public int xClic, yClic;
 
+        private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        {
+            item.ToolTipMode = MarkerTooltipMode.Always;
+            Task.Delay(3000).ContinueWith(t => {
+                this.Invoke(new Action(() => item.ToolTipMode = MarkerTooltipMode.Never));
+            });
+        }
         public frmGestionRutas()
         {
             InitializeComponent();
             cmbVehiculo.DataSource = funciones_generales.llenardatosCmBox();
             dtpFechaInicial.Format = DateTimePickerFormat.Custom;
-            dtpFechaInicial.CustomFormat = "dd/MM/yyyy HH:mm"; 
+            dtpFechaInicial.CustomFormat = "dd/MM/yyyy HH:mm";
             dtpFechaInicial.ShowUpDown = true;
             dtpFechaFinal.Format = DateTimePickerFormat.Custom;
             dtpFechaFinal.CustomFormat = "dd/MM/yyyy HH:mm";
@@ -69,8 +76,6 @@ namespace Localizame.vista
             gMapControl1.AutoScroll = true;
 
         }
-
-
 
         private void frmGestionRutas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -106,7 +111,6 @@ namespace Localizame.vista
 
                 string[] marcadores = funciones_generales.cargarMarcadores(vh, fechaInicial, fechaFinal);
 
-
                 if (marcadores.Length > 0)
                 {
                     foreach (var marcador in marcadores)
@@ -115,14 +119,20 @@ namespace Localizame.vista
 
                         double latitudInt = Convert.ToDouble(parts[0]);
                         double longitudInt = Convert.ToDouble(parts[1]);
+                        string fechaHora = Convert.ToString(parts[2]);
 
                         double latitud = funciones_generales.ConvertirCoordenada1dg(latitudInt);
                         double longitud = funciones_generales.ConvertirCoordenada2dg(longitudInt);
 
                         GMapMarker marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.red_dot);
+
+                        marker.ToolTipMode = MarkerTooltipMode.Never;
+                        marker.ToolTipText = string.Format("Ubicacion: \n Latitud: {0} \n Longitud: {1} \n Fecha y hora: {2}", latitud, longitud, fechaHora);
                         markersOverlay.Markers.Add(marker);
                     }
                 }
+
+                gMapControl1.OnMarkerClick += new MarkerClick(gmap_OnMarkerClick);
 
                 if (!gMapControl1.Overlays.Contains(markersOverlay))
                 {
@@ -181,9 +191,11 @@ namespace Localizame.vista
 
                 gMapControl1.Zoom = -16;
                 gMapControl1.Refresh();
-                gMapControl1.Zoom=16;
+                gMapControl1.Zoom = 16;
 
             }
         }
+
+        
     }
 }
