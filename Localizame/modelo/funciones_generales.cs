@@ -138,7 +138,8 @@ namespace Localizame.modelo
                 {
                     double latitud = Convert.ToDouble(reader["latitud"]);
                     double longitud = Convert.ToDouble(reader["longitud"]);
-                    posiciones.Add($"{latitud}, {longitud}");
+                    string fechaHora = Convert.ToString(reader["fechaHora"]);
+                    posiciones.Add($"{latitud}, {longitud}, {fechaHora}");
                 }
             }
             else
@@ -171,6 +172,8 @@ namespace Localizame.modelo
             cn.CerrarConexion();
             return posiciones.ToArray();
         }
+
+       
 
 
     }

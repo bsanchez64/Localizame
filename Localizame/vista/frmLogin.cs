@@ -39,14 +39,19 @@ namespace Localizame.vista
             user = txtUsuario.Text;
             password = txtPassword.Text;
 
+            var loading = new loading();
+            loading.Show();
+
             if (string.IsNullOrEmpty(user))
             {
+                loading.Close();
                 MessageBox.Show("Debes ingresar un nombre de usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 if (string.IsNullOrEmpty(password))
                 {
+                    loading.Close();
                     MessageBox.Show("Debes ingresar la contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
@@ -71,12 +76,14 @@ namespace Localizame.vista
                             {
                                 funciones_generales.setName(nombreDb);
                                 //MessageBox.Show("Bienvenido, " + nombreDb);
+                                loading.Close();
                                 this.Hide();
                                 new frmMenu().ShowDialog();
 
                             }
                             else
                             {
+                                loading.Close();
                                 MessageBox.Show("La clave ingresada o el usuario no corresponden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             }
@@ -85,6 +92,7 @@ namespace Localizame.vista
                     }
                     else
                     {
+                        loading.Close();
                         MessageBox.Show("No se encontraron resultados para el usuario: " + user, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
