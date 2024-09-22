@@ -7,7 +7,12 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<ApplicationIcon>imagenes\favicon.ico</ApplicationIcon>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="imagenes\favicon.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="GMap.NET.Core" Version="2.1.7" />
