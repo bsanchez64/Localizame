@@ -14,11 +14,35 @@ namespace Localizame.vista
     public partial class frmMenu : Form
     {
         public int xClic, yClic;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; 
+                return cp;
+            }
+        }
+
         public frmMenu()
         {
+
             InitializeComponent();
+
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             lblBienvenido.Text = "Bienvenido, " + funciones_generales.getName();
+
+            if (funciones_generales.getNivel() == "administrador")
+            {
+                lblUserPlat.Location = new Point(lblUserPlat.Location.X - 20, lblUserPlat.Location.Y);
+                lblUserPlat.Text = "Gestionar \nPlataforma";
+            }
+            else
+            {
+                lblUserPlat.Text = "Perfil";
+            }
+
         }
 
         private void frmMenu_Load(object sender, EventArgs e)
@@ -55,6 +79,18 @@ namespace Localizame.vista
         private void pnlGeocercas_MouseClick(object sender, MouseEventArgs e)
         {
             new frmGeocercas().Show(this);
+        }
+
+        private void pnlGestionSoft_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (funciones_generales.getNivel() == "administrador")
+            {
+                MessageBox.Show("aca iría el menú de administrador");
+            }
+            else
+            {
+                MessageBox.Show("aca iría el perfil del usuario");
+            }
         }
 
         private void pnlGestionRuta_MouseHover(object sender, EventArgs e)
@@ -95,6 +131,11 @@ namespace Localizame.vista
         private void pnlInformes_MouseLeave(object sender, EventArgs e)
         {
             pnlInformes.BackColor = Color.FromArgb(0, 0, 50, 231);
+        }
+
+        private void lblBienvenido_Click(object sender, EventArgs e)
+        {
+
         }
 
        
