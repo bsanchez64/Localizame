@@ -26,10 +26,21 @@ namespace Localizame.vista
         int filaSeleccionada = 0;
         double LatInicial = 6.1711964;
         double LngInicial = -75.6514894;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
         public frmGeocercas()
         {
             InitializeComponent();
         }
+
 
         private void frmGeocercas_Load(object sender, EventArgs e)
         {
@@ -104,7 +115,7 @@ namespace Localizame.vista
 
         private void gMapControl1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
+
             // se obtiene los datos de lat y long del mapa donde usuario presiono
             double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
             double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
@@ -163,7 +174,7 @@ namespace Localizame.vista
             //variables para almacenar
             double lng, lat;
             //agarramos los datos del grid
-            for (int filas=0; filas< dataGridView1.Rows.Count; filas++)
+            for (int filas = 0; filas < dataGridView1.Rows.Count; filas++)
             {
                 lat = Convert.ToDouble(dataGridView1.Rows[filas].Cells[1].Value);
                 lng = Convert.ToDouble(dataGridView1.Rows[filas].Cells[2].Value);
@@ -176,5 +187,7 @@ namespace Localizame.vista
             gMapControl1.Zoom = gMapControl1.Zoom + 1;
             gMapControl1.Zoom = gMapControl1.Zoom - 1;
         }
+
+       
     }
 }

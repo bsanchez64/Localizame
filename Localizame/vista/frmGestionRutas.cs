@@ -34,7 +34,17 @@ namespace Localizame.vista
 
         public int xClic, yClic;
 
-        private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        protected override CreateParams CreateParams{
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+    
+
+    private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
             item.ToolTipMode = MarkerTooltipMode.Always;
             Task.Delay(3000).ContinueWith(t => {

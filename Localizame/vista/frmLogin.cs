@@ -23,7 +23,19 @@ namespace Localizame.vista
         DataTable dt;
         string user, password;
         public int xClic, yClic;
-        public frmLogin()
+
+        
+        protected override CreateParams CreateParams {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; 
+                return cp;
+            }
+        }
+    
+
+    public frmLogin()
         {
             InitializeComponent();
             this.AcceptButton = btnSesionOn;
@@ -66,15 +78,18 @@ namespace Localizame.vista
                     {
                         while (reader.Read())
                         {
-                            string usernameDb = reader["username"].ToString();
                             string passwordDb = reader["password"].ToString();
                             string nombreDb = reader["nombre"].ToString();
+                            string idDb = reader["Id"].ToString();
+                            string nivelDb = reader["nivel"].ToString();
 
                             string passwordLogin = funciones_generales.GetMD5(password);
 
                             if (passwordDb == passwordLogin)
                             {
                                 funciones_generales.setName(nombreDb);
+                                funciones_generales.setIdUsuario(idDb);
+                                funciones_generales.setNivel(nivelDb);
                                 //MessageBox.Show("Bienvenido, " + nombreDb);
                                 loading.Close();
                                 this.Hide();
