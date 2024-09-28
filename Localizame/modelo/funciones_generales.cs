@@ -27,6 +27,8 @@ namespace Localizame.modelo
         public static SqlCommand cmd;
 
         public static string nombre;
+        public static string IdUsuario;
+        public static string nivel;
 
         public static string GetMD5(string str)
         {
@@ -46,6 +48,24 @@ namespace Localizame.modelo
         public static string getName()
         {
             return nombre;
+        }
+
+        public static void setIdUsuario(string str)
+        {
+            funciones_generales.IdUsuario = str;
+        }
+        public static string getIdUsuario()
+        {
+            return IdUsuario;
+        }
+
+        public static void setNivel(string str)
+        {
+            funciones_generales.nivel = str;
+        }
+        public static string getNivel()
+        {
+            return nivel;
         }
 
         public static void CerrarSesion()
