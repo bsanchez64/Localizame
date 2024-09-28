@@ -34,7 +34,8 @@ namespace Localizame.vista
 
         public int xClic, yClic;
 
-        protected override CreateParams CreateParams{
+        protected override CreateParams CreateParams
+        {
             get
             {
                 CreateParams cp = base.CreateParams;
@@ -42,12 +43,13 @@ namespace Localizame.vista
                 return cp;
             }
         }
-    
 
-    private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+
+        private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
             item.ToolTipMode = MarkerTooltipMode.Always;
-            Task.Delay(3000).ContinueWith(t => {
+            Task.Delay(3000).ContinueWith(t =>
+            {
                 this.Invoke(new Action(() => item.ToolTipMode = MarkerTooltipMode.Never));
             });
         }
@@ -109,7 +111,6 @@ namespace Localizame.vista
             fechaFinal = dtpFechaFinal.Value;
             markersOverlay.Markers.Clear();
             gMapControl1.Refresh();
-            gMapControl1.Position = new PointLatLng(LatInicial, LngInicial);
 
 
             if (vh == "Selecciona una opcion")
@@ -206,6 +207,31 @@ namespace Localizame.vista
             }
         }
 
-        
+        private void btnSatelite_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
+
+        }
+
+        private void btnOriginal_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+        }
+
+        private void btnRelieve_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap;
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            trackZoom.Value = Convert.ToInt32(gMapControl1.Zoom);
+        }
+
+        private void trackZoom_ValueChanged(object sender, EventArgs e)
+        {
+            gMapControl1.Zoom = trackZoom.Value;
+        }
     }
 }
