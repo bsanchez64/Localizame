@@ -100,5 +100,10 @@ namespace Localizame.vista
         {
             new frmGeocercas().Show(this);
         }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

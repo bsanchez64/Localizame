@@ -37,6 +37,7 @@ namespace Localizame.vista
             {
                 lblUserPlat.Location = new Point(lblUserPlat.Location.X - 20, lblUserPlat.Location.Y);
                 lblUserPlat.Text = "Gestionar \nPlataforma";
+                
             }
             else
             {
@@ -85,7 +86,7 @@ namespace Localizame.vista
         {
             if (funciones_generales.getNivel() == "administrador")
             {
-                MessageBox.Show("aca iría el menú de administrador");
+                new frmMenuSoftware().Show(this);
             }
             else
             {
