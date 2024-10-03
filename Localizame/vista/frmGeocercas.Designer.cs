@@ -109,10 +109,10 @@
             btnAgregar.BackColor = Color.Black;
             btnAgregar.FlatStyle = FlatStyle.Popup;
             btnAgregar.ForeColor = Color.White;
-            btnAgregar.Location = new Point(782, 304);
+            btnAgregar.Location = new Point(769, 242);
             btnAgregar.Margin = new Padding(3, 4, 3, 4);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(103, 31);
+            btnAgregar.Size = new Size(338, 31);
             btnAgregar.TabIndex = 12;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = false;
@@ -123,10 +123,10 @@
             btnEliminar.BackColor = Color.Black;
             btnEliminar.FlatStyle = FlatStyle.Popup;
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(891, 304);
+            btnEliminar.Location = new Point(769, 281);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(103, 31);
+            btnEliminar.Size = new Size(338, 31);
             btnEliminar.TabIndex = 13;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
@@ -137,10 +137,10 @@
             btnAtras.BackColor = Color.Black;
             btnAtras.FlatStyle = FlatStyle.Popup;
             btnAtras.ForeColor = Color.White;
-            btnAtras.Location = new Point(3, 15);
+            btnAtras.Location = new Point(13, 12);
             btnAtras.Margin = new Padding(3, 4, 3, 4);
             btnAtras.Name = "btnAtras";
-            btnAtras.Size = new Size(103, 31);
+            btnAtras.Size = new Size(146, 31);
             btnAtras.TabIndex = 14;
             btnAtras.Text = "< Volver atrás";
             btnAtras.UseVisualStyleBackColor = false;
@@ -148,34 +148,34 @@
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(794, 88);
+            txtDescripcion.Location = new Point(769, 88);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(313, 27);
+            txtDescripcion.Size = new Size(338, 27);
             txtDescripcion.TabIndex = 15;
             // 
             // txtLatitud
             // 
-            txtLatitud.Location = new Point(794, 153);
+            txtLatitud.Location = new Point(769, 148);
             txtLatitud.Margin = new Padding(3, 4, 3, 4);
             txtLatitud.Name = "txtLatitud";
-            txtLatitud.Size = new Size(313, 27);
+            txtLatitud.Size = new Size(338, 27);
             txtLatitud.TabIndex = 16;
             // 
             // txtLongitud
             // 
-            txtLongitud.Location = new Point(794, 225);
+            txtLongitud.Location = new Point(769, 207);
             txtLongitud.Margin = new Padding(3, 4, 3, 4);
             txtLongitud.Name = "txtLongitud";
-            txtLongitud.Size = new Size(313, 27);
+            txtLongitud.Size = new Size(338, 27);
             txtLongitud.TabIndex = 17;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.BackColor = Color.Black;
+            label2.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(794, 64);
+            label2.Location = new Point(769, 64);
             label2.Name = "label2";
             label2.Size = new Size(87, 20);
             label2.TabIndex = 18;
@@ -185,9 +185,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.BackColor = Color.Black;
+            label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(794, 129);
+            label3.Location = new Point(769, 123);
             label3.Name = "label3";
             label3.Size = new Size(55, 20);
             label3.TabIndex = 19;
@@ -196,9 +196,9 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.BackColor = Color.Black;
+            label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(794, 201);
+            label4.Location = new Point(769, 183);
             label4.Name = "label4";
             label4.Size = new Size(68, 20);
             label4.TabIndex = 20;
@@ -238,10 +238,10 @@
             btnGeocerca.BackColor = Color.Black;
             btnGeocerca.FlatStyle = FlatStyle.Popup;
             btnGeocerca.ForeColor = Color.White;
-            btnGeocerca.Location = new Point(1005, 304);
+            btnGeocerca.Location = new Point(769, 320);
             btnGeocerca.Margin = new Padding(3, 4, 3, 4);
             btnGeocerca.Name = "btnGeocerca";
-            btnGeocerca.Size = new Size(103, 31);
+            btnGeocerca.Size = new Size(338, 31);
             btnGeocerca.TabIndex = 23;
             btnGeocerca.Text = "Geocerca";
             btnGeocerca.UseVisualStyleBackColor = false;

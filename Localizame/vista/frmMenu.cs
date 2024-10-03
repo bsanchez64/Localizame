@@ -20,7 +20,7 @@ namespace Localizame.vista
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; 
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
@@ -78,7 +78,7 @@ namespace Localizame.vista
         }
         private void pnlGeocercas_MouseClick(object sender, MouseEventArgs e)
         {
-            new frmGeocercas().Show(this);
+            new frmMenuGeocercas().Show(this);
         }
 
         private void pnlGestionSoft_MouseClick(object sender, MouseEventArgs e)
@@ -138,6 +138,6 @@ namespace Localizame.vista
 
         }
 
-       
+        
     }
 }
