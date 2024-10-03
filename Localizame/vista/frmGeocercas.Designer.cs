@@ -44,6 +44,7 @@
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
             btnGeocerca = new Button();
+            btnGuardar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -54,9 +55,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 13F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(464, 12);
+            label1.Location = new Point(406, 9);
             label1.Name = "label1";
-            label1.Size = new Size(233, 30);
+            label1.Size = new Size(189, 25);
             label1.TabIndex = 9;
             label1.Text = "Creación de geocercas";
             // 
@@ -66,10 +67,9 @@
             btnCerrar.BackgroundImage = Properties.Resources.cerrar;
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(1083, 12);
-            btnCerrar.Margin = new Padding(3, 4, 3, 4);
+            btnCerrar.Location = new Point(948, 9);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(24, 27);
+            btnCerrar.Size = new Size(21, 20);
             btnCerrar.TabIndex = 10;
             btnCerrar.UseVisualStyleBackColor = false;
             btnCerrar.Click += btnCerrar_Click;
@@ -82,8 +82,7 @@
             gMapControl1.GrayScaleMode = false;
             gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             gMapControl1.LevelsKeepInMemory = 5;
-            gMapControl1.Location = new Point(14, 64);
-            gMapControl1.Margin = new Padding(3, 4, 3, 4);
+            gMapControl1.Location = new Point(12, 48);
             gMapControl1.MarkersEnabled = true;
             gMapControl1.MaxZoom = 2;
             gMapControl1.MinZoom = 2;
@@ -97,7 +96,7 @@
             gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
             gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(737, 585);
+            gMapControl1.Size = new Size(645, 439);
             gMapControl1.TabIndex = 11;
             gMapControl1.Zoom = 0D;
             gMapControl1.Load += gMapControl1_Load;
@@ -109,10 +108,16 @@
             btnAgregar.BackColor = Color.Black;
             btnAgregar.FlatStyle = FlatStyle.Popup;
             btnAgregar.ForeColor = Color.White;
+
             btnAgregar.Location = new Point(769, 242);
             btnAgregar.Margin = new Padding(3, 4, 3, 4);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(338, 31);
+
+            btnAgregar.Location = new Point(674, 208);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(90, 23);
+
             btnAgregar.TabIndex = 12;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = false;
@@ -123,10 +128,16 @@
             btnEliminar.BackColor = Color.Black;
             btnEliminar.FlatStyle = FlatStyle.Popup;
             btnEliminar.ForeColor = Color.White;
+
             btnEliminar.Location = new Point(769, 281);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(338, 31);
+
+            btnEliminar.Location = new Point(770, 208);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(90, 23);
+
             btnEliminar.TabIndex = 13;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
@@ -137,10 +148,15 @@
             btnAtras.BackColor = Color.Black;
             btnAtras.FlatStyle = FlatStyle.Popup;
             btnAtras.ForeColor = Color.White;
+
             btnAtras.Location = new Point(13, 12);
             btnAtras.Margin = new Padding(3, 4, 3, 4);
             btnAtras.Name = "btnAtras";
             btnAtras.Size = new Size(146, 31);
+            btnAtras.Location = new Point(3, 11);
+            btnAtras.Name = "btnAtras";
+            btnAtras.Size = new Size(90, 23);
+
             btnAtras.TabIndex = 14;
             btnAtras.Text = "< Volver atrás";
             btnAtras.UseVisualStyleBackColor = false;
@@ -148,26 +164,41 @@
             // 
             // txtDescripcion
             // 
+
             txtDescripcion.Location = new Point(769, 88);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(338, 27);
+            txtDescripcion.Location = new Point(695, 66);
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(274, 23);
+
             txtDescripcion.TabIndex = 15;
             // 
             // txtLatitud
             // 
+
             txtLatitud.Location = new Point(769, 148);
             txtLatitud.Margin = new Padding(3, 4, 3, 4);
             txtLatitud.Name = "txtLatitud";
             txtLatitud.Size = new Size(338, 27);
+            txtLatitud.Location = new Point(695, 115);
+            txtLatitud.Name = "txtLatitud";
+            txtLatitud.Size = new Size(274, 23);
+
             txtLatitud.TabIndex = 16;
             // 
             // txtLongitud
             // 
+
             txtLongitud.Location = new Point(769, 207);
             txtLongitud.Margin = new Padding(3, 4, 3, 4);
             txtLongitud.Name = "txtLongitud";
             txtLongitud.Size = new Size(338, 27);
+            txtLongitud.Location = new Point(695, 169);
+            txtLongitud.Name = "txtLongitud";
+            txtLongitud.Size = new Size(274, 23);
+
             txtLongitud.TabIndex = 17;
             // 
             // label2
@@ -175,9 +206,13 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
+
             label2.Location = new Point(769, 64);
+
+            label2.Location = new Point(695, 48);
+
             label2.Name = "label2";
-            label2.Size = new Size(87, 20);
+            label2.Size = new Size(69, 15);
             label2.TabIndex = 18;
             label2.Text = "Descripción";
             label2.Click += label2_Click;
@@ -187,9 +222,13 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
+
             label3.Location = new Point(769, 123);
+
+            label3.Location = new Point(695, 97);
+
             label3.Name = "label3";
-            label3.Size = new Size(55, 20);
+            label3.Size = new Size(44, 15);
             label3.TabIndex = 19;
             label3.Text = "Latitud";
             // 
@@ -199,8 +238,10 @@
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
             label4.Location = new Point(769, 183);
+
+            label4.Location = new Point(695, 151);
             label4.Name = "label4";
-            label4.Size = new Size(68, 20);
+            label4.Size = new Size(55, 15);
             label4.TabIndex = 20;
             label4.Text = "Longitud";
             // 
@@ -209,12 +250,11 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(769, 368);
-            dataGridView1.Margin = new Padding(3, 4, 3, 4);
+            dataGridView1.Location = new Point(673, 276);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(338, 280);
+            dataGridView1.Size = new Size(296, 210);
             dataGridView1.TabIndex = 21;
             dataGridView1.CellMouseClick += SeleccionarRegistro;
             // 
@@ -224,10 +264,9 @@
             panel1.Controls.Add(btnCerrar);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnAtras);
-            panel1.Location = new Point(1, -3);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(1, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1120, 59);
+            panel1.Size = new Size(980, 44);
             panel1.TabIndex = 22;
             panel1.MouseDown += panel1_MouseDown;
             panel1.MouseMove += panel1_MouseMove;
@@ -238,22 +277,42 @@
             btnGeocerca.BackColor = Color.Black;
             btnGeocerca.FlatStyle = FlatStyle.Popup;
             btnGeocerca.ForeColor = Color.White;
+
             btnGeocerca.Location = new Point(769, 320);
             btnGeocerca.Margin = new Padding(3, 4, 3, 4);
             btnGeocerca.Name = "btnGeocerca";
             btnGeocerca.Size = new Size(338, 31);
+
+            btnGeocerca.Location = new Point(866, 208);
+            btnGeocerca.Name = "btnGeocerca";
+            btnGeocerca.Size = new Size(90, 23);
+
             btnGeocerca.TabIndex = 23;
             btnGeocerca.Text = "Geocerca";
             btnGeocerca.UseVisualStyleBackColor = false;
             btnGeocerca.Click += btnGeocerca_Click;
             // 
+            // btnGuardar
+            // 
+            btnGuardar.BackColor = Color.Black;
+            btnGuardar.FlatStyle = FlatStyle.Popup;
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(673, 247);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(90, 23);
+            btnGuardar.TabIndex = 24;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
             // frmGeocercas
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.backsolo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1121, 665);
+            ClientSize = new Size(981, 499);
+            Controls.Add(btnGuardar);
             Controls.Add(btnGeocerca);
             Controls.Add(panel1);
             Controls.Add(dataGridView1);
@@ -268,6 +327,7 @@
             Controls.Add(gMapControl1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmGeocercas";
             Text = "frmGeocercas";
             Load += frmGeocercas_Load;
@@ -295,5 +355,6 @@
         private DataGridView dataGridView1;
         private Panel panel1;
         private Button btnGeocerca;
+        private Button btnGuardar;
     }
 }
