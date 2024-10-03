@@ -20,7 +20,7 @@ namespace Localizame.vista
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; 
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
@@ -37,6 +37,7 @@ namespace Localizame.vista
             {
                 lblUserPlat.Location = new Point(lblUserPlat.Location.X - 20, lblUserPlat.Location.Y);
                 lblUserPlat.Text = "Gestionar \nPlataforma";
+                
             }
             else
             {
@@ -78,14 +79,14 @@ namespace Localizame.vista
         }
         private void pnlGeocercas_MouseClick(object sender, MouseEventArgs e)
         {
-            new frmGeocercas().Show(this);
+            new frmMenuGeocercas().Show(this);
         }
 
         private void pnlGestionSoft_MouseClick(object sender, MouseEventArgs e)
         {
             if (funciones_generales.getNivel() == "administrador")
             {
-                MessageBox.Show("aca iría el menú de administrador");
+                new frmMenuSoftware().Show(this);
             }
             else
             {
@@ -138,6 +139,6 @@ namespace Localizame.vista
 
         }
 
-       
+        
     }
 }

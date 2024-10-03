@@ -18,6 +18,7 @@ using System.Security.Policy;
 using System.Numerics;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Localizame.modelo
 {
@@ -86,8 +87,21 @@ namespace Localizame.modelo
         public static List<string> llenardatosCmBox()
         {
             List<string> placas = new List<string>();
-            placas.Add("Selecciona una opcion");
-            using (SqlDataAdapter da = new SqlDataAdapter("SELECT placa FROM Vehiculos GROUP BY placa", cn.AbrirConexion()))
+
+            placas.Add("Selecciona una opción");
+            if (getNivel() == "administrador")
+            {
+                cmd = new SqlCommand("SELECT placa FROM Vehiculos GROUP BY placa", cn.AbrirConexion());
+            }
+            else
+            {
+                cmd = new SqlCommand("SELECT placa FROM Vehiculos WHERE  propietario=@propietario GROUP BY placa", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@propietario", getIdUsuario());
+            }
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            using (da)
             {
                 DataTable dt = new DataTable();
                 da.Fill(dt);
