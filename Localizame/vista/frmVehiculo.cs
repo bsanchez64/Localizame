@@ -12,6 +12,7 @@ namespace Localizame.vista
         int Id;
         public static connection cn = new connection();
         public static SqlCommand cmd;
+        public int xClic, yClic;
         public frmVehiculo()
         {
             InitializeComponent();
@@ -35,15 +36,15 @@ namespace Localizame.vista
 
         private void gridVehiculos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            if (gridVehiculos.Columns[e.ColumnIndex].Name=="Editar")
+
+            if (gridVehiculos.Columns[e.ColumnIndex].Name == "Editar")
             {
                 Id = Convert.ToInt32(gridVehiculos.CurrentRow.Cells["Id"].Value.ToString());
                 frmVehiculoEditar editarRegistro = new frmVehiculoEditar(Id);
                 editarRegistro.ShowDialog();
                 funciones_generales.llenarDataViewVehiculos(gridVehiculos);
-            } 
-            
+            }
+
             if (gridVehiculos.Columns[e.ColumnIndex].Name == "Eliminar")
             {
                 Id = Convert.ToInt32(gridVehiculos.CurrentRow.Cells["Id"].Value.ToString());
@@ -65,9 +66,36 @@ namespace Localizame.vista
                         MessageBox.Show("No se encontró ningún vehículo con la placa proporcionada o no se pudo actualizar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
-                }             
+                }
 
                 funciones_generales.llenarDataViewVehiculos(gridVehiculos);
+            }
+        }
+
+        private void btnNuevoVh_Click(object sender, EventArgs e)
+        {
+            frmVehiculoAgregar frmVehiculoAgregar = new frmVehiculoAgregar();
+            frmVehiculoAgregar.ShowDialog();
+            funciones_generales.llenarDataViewVehiculos(gridVehiculos);
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmVehiculo_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                xClic = e.X; yClic = e.Y;
+
+            }
+            else
+            {
+                this.Left = this.Left + (e.X);
+                this.Top = this.Top + (e.Y);
+
             }
         }
     }
