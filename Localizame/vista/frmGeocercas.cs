@@ -1,9 +1,20 @@
+<<<<<<< HEAD
 ﻿using GMap.NET;
 using GMap.NET.MapProviders;
+=======
+﻿using Microsoft.Data.SqlClient;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms.Markers;
+>>>>>>> 96a7f37dad60f2232110fcd9362f7f50004c7ee1
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using Localizame.modelo;
+<<<<<<< HEAD
 using System.Data;
+=======
+using Localizame.controlador;
+using Microsoft.VisualBasic.ApplicationServices;
+>>>>>>> 96a7f37dad60f2232110fcd9362f7f50004c7ee1
 
 namespace Localizame.vista
 {
@@ -12,8 +23,10 @@ namespace Localizame.vista
 
         GMarkerGoogle marker;
         GMapOverlay markerOverlay;
+        connection cn = new connection();
+        SqlDataAdapter da;
+        SqlCommand cmd;
         DataTable dt;
-
         int filaSeleccionada = 0;
         double LatInicial = 6.1711964;
         double LngInicial = -75.6514894;
@@ -41,7 +54,7 @@ namespace Localizame.vista
             dt.Columns.Add(new DataColumn("Long", typeof(double)));
 
             // insertar datos al dt para mostrar en la lista
-            dt.Rows.Add("Pilsen", LatInicial, LngInicial);
+            dt.Rows.Add("Ubicacion Inicial", LatInicial, LngInicial);
             dataGridView1.DataSource = dt;
 
             // desactivar columnas de lat y long
@@ -58,17 +71,18 @@ namespace Localizame.vista
             gMapControl1.AutoScroll = true;
 
             // marcador
-            markerOverlay = new GMapOverlay("Marcador");
-            marker = new GMarkerGoogle(new PointLatLng(LatInicial, LngInicial), GMarkerGoogleType.green);
-            markerOverlay.Markers.Add(marker);//Agregamos al mapa
+            markerOverlay = new GMapOverlay("Marcador");//Agregamos el overlay al mapa
 
-            // agregamos un tooltip de texto a los marcadores
+            // Inicializamos el marcador antes de usarlo
+            marker = new GMarkerGoogle(new PointLatLng(LatInicial, LngInicial), GMarkerGoogleType.green);
+
+            // agregamos el tooltip de texto al marcador
             marker.ToolTipMode = MarkerTooltipMode.Always;
             marker.ToolTipText = string.Format("Ubicacion: \n Latitud: {0} \n Longitud: {1}", LatInicial, LngInicial);
 
-            // agregamos el mapa y el marcador al map control
+            // Agregamos el marcador al overlay y luego al mapa
+            markerOverlay.Markers.Add(marker);
             gMapControl1.Overlays.Add(markerOverlay);
-
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -106,23 +120,37 @@ namespace Localizame.vista
 
         private void gMapControl1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
-            // se obtiene los datos de lat y long del mapa donde usuario presiono
+            // Se obtienen los datos de lat y long del mapa donde el usuario presionó
             double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
             double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
 
-            // se posicionan en el txt de la latitud y longitud
+            // Se posicionan en el txt de la latitud y longitud
             txtLatitud.Text = lat.ToString();
             txtLongitud.Text = lng.ToString();
-            //creamos el marcador para moverlo al lugar indicado
+
+            // Comprobamos si el marcador está inicializado, de lo contrario lo creamos
+            if (marker == null)
+            {
+                marker = new GMarkerGoogle(new PointLatLng(lat, lng), GMarkerGoogleType.green);
+                markerOverlay.Markers.Add(marker); // Agregamos el marcador al overlay si es nuevo
+                gMapControl1.Overlays.Add(markerOverlay); // Aseguramos que el overlay está en el mapa
+            }
+
+            // Si el marcador ya existe, lo movemos al nuevo lugar
             marker.Position = new PointLatLng(lat, lng);
-            // tambien agregamos el mensaje al marcador(tooltip)
             marker.ToolTipText = string.Format("Ubicación: \n Latitud: {0} \n Longitud: {1}", lat, lng);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            dt.Rows.Add(txtDescripcion.Text, txtLatitud.Text, txtLongitud.Text);// agregar a la tabla
+            if (string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                MessageBox.Show("Introduce nombre de la ubicación");
+            }
+            else
+            {
+                dt.Rows.Add(txtDescripcion.Text, txtLatitud.Text, txtLongitud.Text);// agregar a la tabla
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -162,23 +190,55 @@ namespace Localizame.vista
         {
             GMapOverlay Geocerca = new GMapOverlay("Geocerca");
             List<PointLatLng> puntos = new List<PointLatLng>();
-            //variables para almacenar
+
             double lng, lat;
-            //agarramos los datos del grid
+
+            // agarramos los datos del grid
             for (int filas = 0; filas < dataGridView1.Rows.Count; filas++)
             {
                 lat = Convert.ToDouble(dataGridView1.Rows[filas].Cells[1].Value);
                 lng = Convert.ToDouble(dataGridView1.Rows[filas].Cells[2].Value);
                 puntos.Add(new PointLatLng(lat, lng));
             }
+
+
+            // Validar si hay al menos 4 puntos
+            if (puntos.Count < 4)
+            {
+                MessageBox.Show("Debes agregar al menos 4 puntos para crear un polígono.");
+                return; // Salir si no hay suficientes puntos
+            }
+
+            // Si hay suficientes puntos, proceder a crear el polígono
             GMapPolygon geocercaPuntos = new GMapPolygon(puntos, "Geocerca");
             Geocerca.Polygons.Add(geocercaPuntos);
             gMapControl1.Overlays.Add(Geocerca);
-            //Actualizar el mapa
+
+            // Actualizar el mapa para que se vea el cambio
             gMapControl1.Zoom = gMapControl1.Zoom + 1;
             gMapControl1.Zoom = gMapControl1.Zoom - 1;
+
         }
 
+<<<<<<< HEAD
 
+=======
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                txtDescripcion.Text = dataGridView1.Rows[filaSeleccionada].Cells[0].Value.ToString();
+                txtLatitud.Text = dataGridView1.Rows[filaSeleccionada].Cells[1].Value.ToString();
+                txtLongitud.Text = dataGridView1.Rows[filaSeleccionada].Cells[2].Value.ToString();
+
+                cmd = new SqlCommand("INSERT INTO Geocercas (nombrePoligono, latitud, longitud) VALUES (@nombrePoligono, @latitud, @longitud)", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@nombrePoligono", txtDescripcion.Text);
+                cmd.Parameters.AddWithValue("@latitud", txtLatitud.Text);
+                cmd.Parameters.AddWithValue("@longitud", txtLongitud.Text);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Hecho");
+            }
+        }
+>>>>>>> 96a7f37dad60f2232110fcd9362f7f50004c7ee1
     }
 }
