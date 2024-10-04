@@ -13,7 +13,11 @@ namespace Localizame
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+<<<<<<< HEAD
+            Application.Run(new frmVehiculo());
+=======
             Application.Run(new frmGeocercas());
+>>>>>>> 96a7f37dad60f2232110fcd9362f7f50004c7ee1
         }
     }
 }

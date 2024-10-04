@@ -1,20 +1,20 @@
+<<<<<<< HEAD
+﻿using GMap.NET;
+using GMap.NET.MapProviders;
+=======
 ﻿using Microsoft.Data.SqlClient;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms.Markers;
+>>>>>>> 96a7f37dad60f2232110fcd9362f7f50004c7ee1
 using GMap.NET.WindowsForms;
-using GMap.NET;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using GMap.NET.WindowsForms.Markers;
 using Localizame.modelo;
+<<<<<<< HEAD
+using System.Data;
+=======
 using Localizame.controlador;
 using Microsoft.VisualBasic.ApplicationServices;
+>>>>>>> 96a7f37dad60f2232110fcd9362f7f50004c7ee1
 
 namespace Localizame.vista
 {
@@ -220,6 +220,9 @@ namespace Localizame.vista
 
         }
 
+<<<<<<< HEAD
+
+=======
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
@@ -236,5 +239,6 @@ namespace Localizame.vista
                 MessageBox.Show("Hecho");
             }
         }
+>>>>>>> 96a7f37dad60f2232110fcd9362f7f50004c7ee1
     }
 }
