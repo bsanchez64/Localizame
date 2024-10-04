@@ -1,18 +1,9 @@
-﻿using GMap.NET.MapProviders;
-using GMap.NET.WindowsForms.Markers;
+﻿using GMap.NET;
+using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
-using GMap.NET;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using GMap.NET.WindowsForms.Markers;
 using Localizame.modelo;
-using Localizame.controlador;
+using System.Data;
 
 namespace Localizame.vista
 {
@@ -188,6 +179,6 @@ namespace Localizame.vista
             gMapControl1.Zoom = gMapControl1.Zoom - 1;
         }
 
-       
+
     }
 }

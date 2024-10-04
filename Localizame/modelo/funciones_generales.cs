@@ -1,24 +1,9 @@
 ﻿using Localizame.controlador;
-using Microsoft.Identity.Client;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
-using GMap.NET.WindowsForms.Markers;
-using GMap.NET.WindowsForms;
-using GMap.NET;
-using System.Globalization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Security.Policy;
-using System.Numerics;
-using System.Windows.Forms;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace Localizame.modelo
 {
@@ -91,11 +76,11 @@ namespace Localizame.modelo
             placas.Add("Selecciona una opción");
             if (getNivel() == "administrador")
             {
-                cmd = new SqlCommand("SELECT placa FROM Vehiculos GROUP BY placa", cn.AbrirConexion());
+                cmd = new SqlCommand("SELECT placa FROM pasoVehiculos GROUP BY placa", cn.AbrirConexion());
             }
             else
             {
-                cmd = new SqlCommand("SELECT placa FROM Vehiculos WHERE  propietario=@propietario GROUP BY placa", cn.AbrirConexion());
+                cmd = new SqlCommand("SELECT placa FROM pasoVehiculos WHERE propietario=@propietario GROUP BY placa", cn.AbrirConexion());
                 cmd.Parameters.AddWithValue("@propietario", getIdUsuario());
             }
 
@@ -112,6 +97,25 @@ namespace Localizame.modelo
             }
             cn.CerrarConexion();
             return placas;
+        }
+
+        public static List<string> llenarPropietariosCmBox()
+        {
+            List<string> propietarios = new List<string>();
+            cmd = new SqlCommand("SELECT propietario FROM vehiculos GROUP BY propietario", cn.AbrirConexion());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            using (da)
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    propietarios.Add(row["propietario"].ToString());
+                }
+            }
+            cn.CerrarConexion();
+            return propietarios;
         }
 
 
@@ -137,7 +141,7 @@ namespace Localizame.modelo
             if (coordinateString.Length == 2)
             {
                 firstDigits = coordinateString.Substring(0, 2);
-                remainingDigits = "0"; 
+                remainingDigits = "0";
             }
             else
             {
@@ -155,10 +159,10 @@ namespace Localizame.modelo
             return dateTime.Date; // Esto devuelve solo la fecha
         }
 
-        public static string[] cargarMarcadores(string placa, DateTime fechaInicial,DateTime fechaFinal)
+        public static string[] cargarMarcadores(string placa, DateTime fechaInicial, DateTime fechaFinal)
         {
 
-            cmd = new SqlCommand("SELECT * FROM Vehiculos WHERE placa = @placa and fechaHora BETWEEN @fechaInicial and @fechaFinal ", cn.AbrirConexion());
+            cmd = new SqlCommand("SELECT * FROM pasoVehiculos WHERE placa = @placa and fechaHora BETWEEN @fechaInicial and @fechaFinal ", cn.AbrirConexion());
             cmd.Parameters.AddWithValue("@placa", placa);
             cmd.Parameters.AddWithValue("@fechaInicial", fechaInicial);
             cmd.Parameters.AddWithValue("@fechaFinal", fechaFinal);
@@ -181,7 +185,7 @@ namespace Localizame.modelo
                 MessageBox.Show("Esta consulta no tiene resultados", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
-            
+
             cn.CerrarConexion();
             return posiciones.ToArray();
         }
@@ -189,7 +193,7 @@ namespace Localizame.modelo
         public static string[] cargarUltimaPosicion(string placa)
         {
 
-            cmd = new SqlCommand("SELECT TOP 1 * FROM Vehiculos WHERE placa = @placa ORDER BY id DESC", cn.AbrirConexion());
+            cmd = new SqlCommand("SELECT TOP 1 * FROM pasoVehiculos WHERE placa = @placa ORDER BY id DESC", cn.AbrirConexion());
             cmd.Parameters.AddWithValue("@placa", placa);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -197,7 +201,6 @@ namespace Localizame.modelo
 
             while (reader.Read())
             {
-                // Suponiendo que latitud y longitud están almacenadas como enteros
                 double latitud = Convert.ToDouble(reader["latitud"]);
                 double longitud = Convert.ToDouble(reader["longitud"]);
                 string fechaHora = Convert.ToString(reader["fechaHora"]);
@@ -207,7 +210,46 @@ namespace Localizame.modelo
             return posiciones.ToArray();
         }
 
-       
+        public static void llenarDataViewVehiculos(DataGridView gridVehiculos)
+        {
+            try
+            {
+                cmd = new SqlCommand("SELECT * FROM Vehiculos", cn.AbrirConexion());
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gridVehiculos.DataSource = dt;
+                cn.CerrarConexion();
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        public static string[] buscarEditarVehiculo(int vId)
+        {
+            List<string> editar = new List<string>();
+
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM Vehiculos WHERE Id=@id", cn.AbrirConexion()))
+            {
+                cmd.Parameters.AddWithValue("@id", vId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string placa = Convert.ToString(reader["placa"]);
+                        string propietario = Convert.ToString(reader["propietario"]);
+                        editar.Add($"{placa}, {propietario}");
+                    }
+                }
+            }
+
+            cn.CerrarConexion();
+            return editar.ToArray();
+        }
 
 
     }

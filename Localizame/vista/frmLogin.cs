@@ -1,16 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Localizame.controlador;
-using System.Security.Cryptography;
+﻿using Localizame.controlador;
 using Localizame.modelo;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace Localizame.vista
 {
@@ -24,18 +15,19 @@ namespace Localizame.vista
         string user, password;
         public int xClic, yClic;
 
-        
-        protected override CreateParams CreateParams {
+
+        protected override CreateParams CreateParams
+        {
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; 
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
-    
 
-    public frmLogin()
+
+        public frmLogin()
         {
             InitializeComponent();
             this.AcceptButton = btnSesionOn;

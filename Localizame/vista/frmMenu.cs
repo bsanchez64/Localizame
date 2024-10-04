@@ -1,13 +1,4 @@
 ﻿using Localizame.modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Localizame.vista
 {
@@ -37,7 +28,7 @@ namespace Localizame.vista
             {
                 lblUserPlat.Location = new Point(lblUserPlat.Location.X - 20, lblUserPlat.Location.Y);
                 lblUserPlat.Text = "Gestionar \nPlataforma";
-                
+
             }
             else
             {
@@ -139,6 +130,6 @@ namespace Localizame.vista
 
         }
 
-        
+
     }
 }
