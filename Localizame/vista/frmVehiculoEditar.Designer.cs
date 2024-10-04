@@ -37,12 +37,16 @@
             btnGuardar = new Button();
             cbxPropietario = new ComboBox();
             btnCancelar = new Button();
+            lblPlaca = new Label();
+            btnCerrar = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(12, 62);
             label1.Name = "label1";
             label1.Size = new Size(22, 20);
             label1.TabIndex = 0;
@@ -51,7 +55,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(93, 9);
+            label2.BackColor = Color.Transparent;
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(93, 62);
             label2.Name = "label2";
             label2.Size = new Size(44, 20);
             label2.TabIndex = 1;
@@ -60,7 +66,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(237, 9);
+            label3.BackColor = Color.Transparent;
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(237, 62);
             label3.Name = "label3";
             label3.Size = new Size(83, 20);
             label3.TabIndex = 2;
@@ -69,7 +77,7 @@
             // txtId
             // 
             txtId.Enabled = false;
-            txtId.Location = new Point(12, 32);
+            txtId.Location = new Point(12, 85);
             txtId.Name = "txtId";
             txtId.Size = new Size(66, 27);
             txtId.TabIndex = 3;
@@ -77,45 +85,79 @@
             // txtPlaca
             // 
             txtPlaca.Enabled = false;
-            txtPlaca.Location = new Point(93, 32);
+            txtPlaca.Location = new Point(93, 85);
             txtPlaca.Name = "txtPlaca";
             txtPlaca.Size = new Size(125, 27);
             txtPlaca.TabIndex = 4;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(12, 75);
+            btnGuardar.BackColor = SystemColors.ActiveCaptionText;
+            btnGuardar.FlatStyle = FlatStyle.Popup;
+            btnGuardar.ForeColor = SystemColors.Control;
+            btnGuardar.Location = new Point(12, 128);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(451, 29);
+            btnGuardar.Size = new Size(451, 35);
             btnGuardar.TabIndex = 6;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // cbxPropietario
             // 
             cbxPropietario.FormattingEnabled = true;
-            cbxPropietario.Location = new Point(237, 32);
+            cbxPropietario.Location = new Point(237, 85);
             cbxPropietario.Name = "cbxPropietario";
             cbxPropietario.Size = new Size(225, 28);
             cbxPropietario.TabIndex = 7;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(12, 125);
+            btnCancelar.BackColor = SystemColors.ActiveCaptionText;
+            btnCancelar.FlatStyle = FlatStyle.Popup;
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.Location = new Point(12, 178);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(449, 29);
             btnCancelar.TabIndex = 8;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
+            // 
+            // lblPlaca
+            // 
+            lblPlaca.AutoSize = true;
+            lblPlaca.BackColor = Color.Transparent;
+            lblPlaca.Font = new Font("Segoe UI", 12F);
+            lblPlaca.ForeColor = SystemColors.ControlLightLight;
+            lblPlaca.Location = new Point(12, 15);
+            lblPlaca.Name = "lblPlaca";
+            lblPlaca.Size = new Size(123, 28);
+            lblPlaca.TabIndex = 15;
+            lblPlaca.Text = "Editar placa: ";
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.BackgroundImage = Properties.Resources.cerrar;
+            btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatStyle = FlatStyle.Popup;
+            btnCerrar.Location = new Point(436, 9);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(24, 30);
+            btnCerrar.TabIndex = 14;
+            btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // frmVehiculoEditar
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(473, 166);
+            BackgroundImage = Properties.Resources.backsolo;
+            ClientSize = new Size(473, 218);
+            Controls.Add(lblPlaca);
+            Controls.Add(btnCerrar);
             Controls.Add(btnCancelar);
             Controls.Add(cbxPropietario);
             Controls.Add(btnGuardar);
@@ -124,8 +166,10 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmVehiculoEditar";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Editar Vehiculo";
             ResumeLayout(false);
             PerformLayout();
@@ -141,5 +185,7 @@
         private Button btnGuardar;
         private ComboBox cbxPropietario;
         private Button btnCancelar;
+        private Label lblPlaca;
+        private Button btnCerrar;
     }
 }
