@@ -77,11 +77,16 @@ namespace Localizame.vista
         {
             if (funciones_generales.getNivel() == "administrador")
             {
-                new frmMenuSoftware().Show(this);
+                frmMenuSoftware frmMenuSoftware = new frmMenuSoftware();
+                this.Hide();
+                frmMenuSoftware.ShowDialog();
+                
             }
             else
             {
-                MessageBox.Show("aca iría el perfil del usuario");
+                frmPerfilUsuario frmPerfilUsuario = new frmPerfilUsuario();
+                this.Hide();
+                frmPerfilUsuario.ShowDialog();
             }
         }
 

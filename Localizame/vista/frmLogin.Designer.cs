@@ -40,11 +40,11 @@
             txtUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             txtUsuario.BorderStyle = BorderStyle.None;
             txtUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsuario.Location = new Point(47, 243);
-            txtUsuario.Margin = new Padding(9, 8, 9, 8);
+            txtUsuario.Location = new Point(54, 324);
+            txtUsuario.Margin = new Padding(10, 11, 10, 11);
             txtUsuario.MinimumSize = new Size(0, 35);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(311, 35);
+            txtUsuario.Size = new Size(355, 27);
             txtUsuario.TabIndex = 0;
             // 
             // txtPassword
@@ -52,13 +52,14 @@
             txtPassword.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             txtPassword.BorderStyle = BorderStyle.None;
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPassword.Location = new Point(44, 325);
-            txtPassword.Margin = new Padding(9, 8, 9, 8);
+            txtPassword.Location = new Point(50, 433);
+            txtPassword.Margin = new Padding(10, 11, 10, 11);
             txtPassword.MinimumSize = new Size(0, 35);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(317, 35);
+            txtPassword.Size = new Size(362, 27);
             txtPassword.TabIndex = 1;
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // btnSesionOn
             // 
@@ -68,10 +69,9 @@
             btnSesionOn.FlatStyle = FlatStyle.Flat;
             btnSesionOn.Font = new Font("Segoe UI", 12F);
             btnSesionOn.ForeColor = Color.White;
-            btnSesionOn.Location = new Point(46, 396);
-            btnSesionOn.Margin = new Padding(3, 2, 3, 2);
+            btnSesionOn.Location = new Point(53, 528);
             btnSesionOn.Name = "btnSesionOn";
-            btnSesionOn.Size = new Size(312, 45);
+            btnSesionOn.Size = new Size(357, 60);
             btnSesionOn.TabIndex = 2;
             btnSesionOn.Text = "Iniciar Sesion";
             btnSesionOn.UseVisualStyleBackColor = false;
@@ -83,10 +83,9 @@
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(369, 11);
-            btnCerrar.Margin = new Padding(3, 2, 3, 2);
+            btnCerrar.Location = new Point(422, 15);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(21, 22);
+            btnCerrar.Size = new Size(24, 29);
             btnCerrar.TabIndex = 3;
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
@@ -94,18 +93,17 @@
             // frmLogin
             // 
             AllowDrop = true;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.login;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(402, 565);
+            ClientSize = new Size(459, 753);
             Controls.Add(btnCerrar);
             Controls.Add(btnSesionOn);
             Controls.Add(txtPassword);
             Controls.Add(txtUsuario);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Iniciar Sesion";

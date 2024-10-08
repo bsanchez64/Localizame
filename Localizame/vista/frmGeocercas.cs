@@ -30,7 +30,7 @@ namespace Localizame.vista
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                cp.ExStyle |= 0x02000000; 
                 return cp;
             }
         }
@@ -47,11 +47,9 @@ namespace Localizame.vista
             dt.Columns.Add(new DataColumn("Lat", typeof(double)));
             dt.Columns.Add(new DataColumn("Long", typeof(double)));
 
-            // insertar datos al dt para mostrar en la lista
             dt.Rows.Add("Ubicacion Inicial", LatInicial, LngInicial);
             dataGridView1.DataSource = dt;
 
-            // desactivar columnas de lat y long
             dataGridView1.Columns[1].Visible = false;
             dataGridView1.Columns[2].Visible = false;
 
@@ -64,17 +62,13 @@ namespace Localizame.vista
             gMapControl1.Zoom = 9;
             gMapControl1.AutoScroll = true;
 
-            // marcador
-            markerOverlay = new GMapOverlay("Marcador");//Agregamos el overlay al mapa
+            markerOverlay = new GMapOverlay("Marcador");
 
-            // Inicializamos el marcador antes de usarlo
             marker = new GMarkerGoogle(new PointLatLng(LatInicial, LngInicial), GMarkerGoogleType.green);
 
-            // agregamos el tooltip de texto al marcador
             marker.ToolTipMode = MarkerTooltipMode.Always;
             marker.ToolTipText = string.Format("Ubicacion: \n Latitud: {0} \n Longitud: {1}", LatInicial, LngInicial);
 
-            // Agregamos el marcador al overlay y luego al mapa
             markerOverlay.Markers.Add(marker);
             gMapControl1.Overlays.Add(markerOverlay);
         }
@@ -101,36 +95,29 @@ namespace Localizame.vista
 
         private void SeleccionarRegistro(object sender, DataGridViewCellMouseEventArgs e)
         {
-            filaSeleccionada = e.RowIndex;//Fila seleccionada
-            //Recuperamos los datos del grid y los asignamos a los textbox
+            filaSeleccionada = e.RowIndex;
             txtDescripcion.Text = dataGridView1.Rows[filaSeleccionada].Cells[0].Value.ToString();
             txtLatitud.Text = dataGridView1.Rows[filaSeleccionada].Cells[1].Value.ToString();
             txtLongitud.Text = dataGridView1.Rows[filaSeleccionada].Cells[2].Value.ToString();
-            // se asignan los valores del grid al marcador
             marker.Position = new PointLatLng(Convert.ToDouble(txtLatitud.Text), Convert.ToDouble(txtLongitud.Text));
-            // se posiciona el foco del mapa en la posicion del marcador
             gMapControl1.Position = marker.Position;
         }
 
         private void gMapControl1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            // Se obtienen los datos de lat y long del mapa donde el usuario presionó
             double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
             double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
 
-            // Se posicionan en el txt de la latitud y longitud
             txtLatitud.Text = lat.ToString();
             txtLongitud.Text = lng.ToString();
 
-            // Comprobamos si el marcador está inicializado, de lo contrario lo creamos
             if (marker == null)
             {
                 marker = new GMarkerGoogle(new PointLatLng(lat, lng), GMarkerGoogleType.green);
-                markerOverlay.Markers.Add(marker); // Agregamos el marcador al overlay si es nuevo
-                gMapControl1.Overlays.Add(markerOverlay); // Aseguramos que el overlay está en el mapa
+                markerOverlay.Markers.Add(marker); 
+                gMapControl1.Overlays.Add(markerOverlay); 
             }
 
-            // Si el marcador ya existe, lo movemos al nuevo lugar
             marker.Position = new PointLatLng(lat, lng);
             marker.ToolTipText = string.Format("Ubicación: \n Latitud: {0} \n Longitud: {1}", lat, lng);
         }
@@ -149,8 +136,7 @@ namespace Localizame.vista
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.RemoveAt(filaSeleccionada);// remover de la tabla
-            //procedimiento para eliminar la base de datos
+            dataGridView1.Rows.RemoveAt(filaSeleccionada);
         }
 
         bool vai = false;
@@ -187,7 +173,6 @@ namespace Localizame.vista
 
             double lng, lat;
 
-            // agarramos los datos del grid
             for (int filas = 0; filas < dataGridView1.Rows.Count; filas++)
             {
                 lat = Convert.ToDouble(dataGridView1.Rows[filas].Cells[1].Value);
@@ -195,20 +180,16 @@ namespace Localizame.vista
                 puntos.Add(new PointLatLng(lat, lng));
             }
 
-
-            // Validar si hay al menos 4 puntos
             if (puntos.Count < 4)
             {
                 MessageBox.Show("Debes agregar al menos 4 puntos para crear un polígono.");
-                return; // Salir si no hay suficientes puntos
+                return;
             }
 
-            // Si hay suficientes puntos, proceder a crear el polígono
             GMapPolygon geocercaPuntos = new GMapPolygon(puntos, "Geocerca");
             Geocerca.Polygons.Add(geocercaPuntos);
             gMapControl1.Overlays.Add(Geocerca);
 
-            // Actualizar el mapa para que se vea el cambio
             gMapControl1.Zoom = gMapControl1.Zoom + 1;
             gMapControl1.Zoom = gMapControl1.Zoom - 1;
 
