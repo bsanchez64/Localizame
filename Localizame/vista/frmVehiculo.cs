@@ -24,12 +24,13 @@ namespace Localizame.vista
             gridVehiculos.Columns["Editar"].DisplayIndex = 3;
             gridVehiculos.Columns["Eliminar"].DisplayIndex = 4;
             gridVehiculos.RowsDefaultCellStyle.Padding = new Padding(0, 3, 0, 3);
+            gridVehiculos.Columns["Editar"].Width = 45;
+            gridVehiculos.Columns["Eliminar"].Width = 55;
         }
 
         private void frmVehiculo_Load(object sender, EventArgs e)
         {
-            gridVehiculos.Columns["Editar"].Width = 45;
-            gridVehiculos.Columns["Eliminar"].Width = 55;
+
 
 
         }
@@ -48,7 +49,6 @@ namespace Localizame.vista
             if (gridVehiculos.Columns[e.ColumnIndex].Name == "Eliminar")
             {
                 Id = Convert.ToInt32(gridVehiculos.CurrentRow.Cells["Id"].Value.ToString());
-                frmVehiculoEditar editarRegistro = new frmVehiculoEditar(Id);
 
                 DialogResult dialogResult = MessageBox.Show("¿Esta seguro de borrar este vehículo?", "Borrar Vehículo", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                 if (dialogResult == DialogResult.Yes)

@@ -31,6 +31,7 @@ namespace Localizame.vista
         {
             InitializeComponent();
             this.AcceptButton = btnSesionOn;
+            
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -114,7 +115,8 @@ namespace Localizame.vista
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-
+            frmSplash frmSplash = new frmSplash();
+            frmSplash.Close();
         }
 
         private void frmLogin_MouseMove(object sender, MouseEventArgs e)

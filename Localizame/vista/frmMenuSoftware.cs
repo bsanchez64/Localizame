@@ -76,7 +76,26 @@ namespace Localizame.vista
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
+            frmMenu frmMenu = new frmMenu();
             this.Hide();
+            frmMenu.ShowDialog();
+        }
+
+        private void pnlUsuarios_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pnlVehiculos_MouseClick(object sender, MouseEventArgs e)
+        {
+            frmVehiculo frmVehiculo = new frmVehiculo();
+            frmVehiculo.ShowDialog();
+        }
+
+        private void pnlOperadores_MouseClick(object sender, MouseEventArgs e)
+        {
+            frmOperadores frmOperadores = new frmOperadores();
+            frmOperadores.ShowDialog();
         }
     }
 }
