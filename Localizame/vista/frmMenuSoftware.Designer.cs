@@ -48,10 +48,9 @@
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(826, 11);
-            btnCerrar.Margin = new Padding(3, 2, 3, 2);
+            btnCerrar.Location = new Point(944, 15);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(21, 20);
+            btnCerrar.Size = new Size(24, 27);
             btnCerrar.TabIndex = 6;
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
@@ -61,10 +60,12 @@
             pnlUsuarios.BackColor = Color.Transparent;
             pnlUsuarios.Controls.Add(label2);
             pnlUsuarios.Cursor = Cursors.Hand;
-            pnlUsuarios.Location = new Point(154, 199);
+            pnlUsuarios.Location = new Point(176, 265);
+            pnlUsuarios.Margin = new Padding(3, 4, 3, 4);
             pnlUsuarios.Name = "pnlUsuarios";
-            pnlUsuarios.Size = new Size(159, 226);
+            pnlUsuarios.Size = new Size(182, 301);
             pnlUsuarios.TabIndex = 11;
+            pnlUsuarios.MouseClick += pnlUsuarios_MouseClick;
             pnlUsuarios.MouseLeave += pnlUsuarios_MouseLeave;
             pnlUsuarios.MouseHover += pnlUsuarios_MouseHover;
             // 
@@ -74,9 +75,9 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(35, 114);
+            label2.Location = new Point(40, 152);
             label2.Name = "label2";
-            label2.Size = new Size(95, 42);
+            label2.Size = new Size(117, 56);
             label2.TabIndex = 6;
             label2.Text = "Usuarios\r\nPlataforma";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -86,10 +87,12 @@
             pnlVehiculos.BackColor = Color.Transparent;
             pnlVehiculos.Controls.Add(label1);
             pnlVehiculos.Cursor = Cursors.Hand;
-            pnlVehiculos.Location = new Point(351, 199);
+            pnlVehiculos.Location = new Point(401, 265);
+            pnlVehiculos.Margin = new Padding(3, 4, 3, 4);
             pnlVehiculos.Name = "pnlVehiculos";
-            pnlVehiculos.Size = new Size(159, 226);
+            pnlVehiculos.Size = new Size(182, 301);
             pnlVehiculos.TabIndex = 12;
+            pnlVehiculos.MouseClick += pnlVehiculos_MouseClick;
             pnlVehiculos.MouseLeave += pnlVehiculos_MouseLeave;
             pnlVehiculos.MouseHover += pnlVehiculos_MouseHover;
             // 
@@ -99,9 +102,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(35, 114);
+            label1.Location = new Point(40, 152);
             label1.Name = "label1";
-            label1.Size = new Size(95, 42);
+            label1.Size = new Size(117, 56);
             label1.TabIndex = 6;
             label1.Text = "Vehiculos\r\nPlataforma";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -111,10 +114,12 @@
             pnlOperadores.BackColor = Color.Transparent;
             pnlOperadores.Controls.Add(label3);
             pnlOperadores.Cursor = Cursors.Hand;
-            pnlOperadores.Location = new Point(544, 199);
+            pnlOperadores.Location = new Point(622, 265);
+            pnlOperadores.Margin = new Padding(3, 4, 3, 4);
             pnlOperadores.Name = "pnlOperadores";
-            pnlOperadores.Size = new Size(159, 226);
+            pnlOperadores.Size = new Size(182, 301);
             pnlOperadores.TabIndex = 13;
+            pnlOperadores.MouseClick += pnlOperadores_MouseClick;
             pnlOperadores.MouseLeave += pnlOperadores_MouseLeave;
             pnlOperadores.MouseHover += pnlOperadores_MouseHover;
             // 
@@ -124,9 +129,9 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(35, 114);
+            label3.Location = new Point(40, 152);
             label3.Name = "label3";
-            label3.Size = new Size(98, 42);
+            label3.Size = new Size(121, 56);
             label3.TabIndex = 6;
             label3.Text = "Vehiculos\r\nOperadores";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -136,9 +141,10 @@
             btnAtras.BackColor = SystemColors.ActiveCaptionText;
             btnAtras.FlatStyle = FlatStyle.Popup;
             btnAtras.ForeColor = Color.White;
-            btnAtras.Location = new Point(12, 10);
+            btnAtras.Location = new Point(14, 13);
+            btnAtras.Margin = new Padding(3, 4, 3, 4);
             btnAtras.Name = "btnAtras";
-            btnAtras.Size = new Size(93, 23);
+            btnAtras.Size = new Size(125, 31);
             btnAtras.TabIndex = 14;
             btnAtras.Text = "< Volver atrás";
             btnAtras.UseVisualStyleBackColor = false;
@@ -146,11 +152,11 @@
             // 
             // frmMenuSoftware
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.frmMenuSoftware;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(859, 479);
+            ClientSize = new Size(982, 639);
             Controls.Add(btnAtras);
             Controls.Add(pnlOperadores);
             Controls.Add(pnlVehiculos);
@@ -158,6 +164,7 @@
             Controls.Add(btnCerrar);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmMenuSoftware";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gestión de software";

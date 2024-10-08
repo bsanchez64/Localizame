@@ -27,23 +27,35 @@ namespace Localizame.vista
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
             string placa = txtPlaca.Text;
             string propietario = cbxPropietario.Text;
 
-            cmd = new SqlCommand("INSERT INTO Vehiculos (placa, propietario) VALUES (@placa, @propietario)", cn.AbrirConexion());
-            cmd.Parameters.AddWithValue("@placa", placa);
-            cmd.Parameters.AddWithValue("@propietario", propietario);
-            int filasAfectadas = cmd.ExecuteNonQuery();
+            string cadena = "SELECT COUNT(*) FROM Vehiculos WHERE placa = @valor";
 
-            if (filasAfectadas > 0)
+            if (funciones_generales.validarExistencia(cadena, placa) > 0)
             {
-                MessageBox.Show("La actualización se realizó con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ya existe un operador con esta cédula.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("No se encontró ningún vehículo con la placa proporcionada o no se pudo actualizar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmd = new SqlCommand("INSERT INTO Vehiculos (placa, propietario) VALUES (@placa, @propietario)", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@placa", placa);
+                cmd.Parameters.AddWithValue("@propietario", propietario);
+                int filasAfectadas = cmd.ExecuteNonQuery();
 
+                if (filasAfectadas > 0)
+                {
+                    MessageBox.Show("La actualización se realizó con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró ningún vehículo con la placa proporcionada o no se pudo actualizar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
             }
+
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
