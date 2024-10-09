@@ -54,14 +54,6 @@ namespace Localizame.modelo
             return nivel;
         }
 
-        public static int validarExistencia(string cadena, string valorBuscar)
-        {
-            SqlCommand checkCmd = new SqlCommand(cadena, cn.AbrirConexion());
-            checkCmd.Parameters.AddWithValue("@valor", valorBuscar);
-            int count = (int)checkCmd.ExecuteScalar();
-            return count;
-        }
-
         public static void CerrarSesion()
         {
             if (MessageBox.Show("¿Estás seguro de cerrar el programa?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -236,15 +228,15 @@ namespace Localizame.modelo
 
         }
 
-        public static void llenarDataViewOperadores(DataGridView gridVehiculos)
+        public static void llenarDataViewUsuarios(DataGridView gridUsuarios)
         {
             try
             {
-                cmd = new SqlCommand("SELECT * FROM Operadores", cn.AbrirConexion());
+                cmd = new SqlCommand("SELECT * FROM Users", cn.AbrirConexion());
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                gridVehiculos.DataSource = dt;
+                gridUsuarios.DataSource = dt;
                 cn.CerrarConexion();
             }
             catch (Exception)
@@ -254,29 +246,6 @@ namespace Localizame.modelo
 
         }
 
-        public static string[] buscarEditarUsuario()
-        {
-            var uId = getIdUsuario();
-            List<string> editar = new List<string>();
-
-            using (SqlCommand cmd = new SqlCommand("SELECT * FROM Users WHERE Id=@id", cn.AbrirConexion()))
-            {
-                cmd.Parameters.AddWithValue("@id", uId);
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        string username = Convert.ToString(reader["username"]);
-                        string nombre = Convert.ToString(reader["nombre"]);
-                        editar.Add($"{username}, {nombre}");
-                    }
-                }
-            }
-
-            cn.CerrarConexion();
-            return editar.ToArray();
-        }
         public static string[] buscarEditarVehiculo(int vId)
         {
             List<string> editar = new List<string>();
@@ -320,28 +289,6 @@ namespace Localizame.modelo
                     }
                 }
             }
-            cn.CerrarConexion();
-            return editar.ToArray();
-        }
-
-        public static string[] buscarEditarOperador(int oId)
-        {
-            List<string> editar = new List<string>();
-
-            using (SqlCommand cmd = new SqlCommand("SELECT * FROM Operadores WHERE cedula=@cedula", cn.AbrirConexion()))
-            {
-                cmd.Parameters.AddWithValue("@cedula", oId);
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        string nombre = Convert.ToString(reader["nombre"]);
-                        editar.Add($"{nombre}");
-                    }
-                }
-            }
-
             cn.CerrarConexion();
             return editar.ToArray();
         }
