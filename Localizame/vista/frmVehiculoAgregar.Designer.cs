@@ -44,9 +44,10 @@
             btnCancelar.BackColor = Color.Black;
             btnCancelar.FlatStyle = FlatStyle.Popup;
             btnCancelar.ForeColor = SystemColors.Control;
-            btnCancelar.Location = new Point(9, 174);
+            btnCancelar.Location = new Point(8, 130);
+            btnCancelar.Margin = new Padding(3, 2, 3, 2);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(449, 29);
+            btnCancelar.Size = new Size(393, 22);
             btnCancelar.TabIndex = 4;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -55,9 +56,10 @@
             // cbxPropietario
             // 
             cbxPropietario.FormattingEnabled = true;
-            cbxPropietario.Location = new Point(234, 78);
+            cbxPropietario.Location = new Point(205, 58);
+            cbxPropietario.Margin = new Padding(3, 2, 3, 2);
             cbxPropietario.Name = "cbxPropietario";
-            cbxPropietario.Size = new Size(225, 28);
+            cbxPropietario.Size = new Size(197, 23);
             cbxPropietario.TabIndex = 2;
             // 
             // btnGuardar
@@ -65,9 +67,10 @@
             btnGuardar.BackColor = Color.Black;
             btnGuardar.FlatStyle = FlatStyle.Popup;
             btnGuardar.ForeColor = SystemColors.Control;
-            btnGuardar.Location = new Point(9, 121);
+            btnGuardar.Location = new Point(8, 91);
+            btnGuardar.Margin = new Padding(3, 2, 3, 2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(451, 35);
+            btnGuardar.Size = new Size(395, 26);
             btnGuardar.TabIndex = 3;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
@@ -75,9 +78,10 @@
             // 
             // txtPlaca
             // 
-            txtPlaca.Location = new Point(12, 78);
+            txtPlaca.Location = new Point(10, 58);
+            txtPlaca.Margin = new Padding(3, 2, 3, 2);
             txtPlaca.Name = "txtPlaca";
-            txtPlaca.Size = new Size(203, 27);
+            txtPlaca.Size = new Size(178, 23);
             txtPlaca.TabIndex = 1;
             // 
             // label3
@@ -85,9 +89,9 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(234, 55);
+            label3.Location = new Point(205, 41);
             label3.Name = "label3";
-            label3.Size = new Size(83, 20);
+            label3.Size = new Size(65, 15);
             label3.TabIndex = 11;
             label3.Text = "Propietario";
             // 
@@ -96,9 +100,9 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(12, 55);
+            label2.Location = new Point(10, 41);
             label2.Name = "label2";
-            label2.Size = new Size(44, 20);
+            label2.Size = new Size(35, 15);
             label2.TabIndex = 10;
             label2.Text = "Placa";
             // 
@@ -108,9 +112,10 @@
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(436, 12);
+            btnCerrar.Location = new Point(382, 9);
+            btnCerrar.Margin = new Padding(3, 2, 3, 2);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(24, 30);
+            btnCerrar.Size = new Size(21, 22);
             btnCerrar.TabIndex = 12;
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
@@ -121,18 +126,18 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(12, 12);
+            label1.Location = new Point(10, 9);
             label1.Name = "label1";
-            label1.Size = new Size(153, 28);
+            label1.Size = new Size(123, 21);
             label1.TabIndex = 13;
             label1.Text = "Vehículos nuevo";
             // 
             // frmVehiculoAgregar
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.backsolo;
-            ClientSize = new Size(475, 221);
+            ClientSize = new Size(416, 166);
             Controls.Add(label1);
             Controls.Add(btnCerrar);
             Controls.Add(btnCancelar);
@@ -143,9 +148,11 @@
             Controls.Add(label2);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmVehiculoAgregar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Nuevo vehículo";
+            Load += frmVehiculoAgregar_Load;
             ResumeLayout(false);
             PerformLayout();
         }

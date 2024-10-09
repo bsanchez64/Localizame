@@ -67,5 +67,10 @@ namespace Localizame.vista
         {
             this.Close();
         }
+
+        private void frmVehiculoAgregar_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

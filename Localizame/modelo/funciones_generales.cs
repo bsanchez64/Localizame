@@ -300,6 +300,30 @@ namespace Localizame.modelo
             return editar.ToArray();
         }
 
+
+        public static string[] buscarEditarUsuario(int UId)
+        {
+            List<string> editar = new List<string>();
+
+            using (SqlCommand cmd = new SqlCommand("SELECT username, nombre, nivel FROM Users WHERE Id=@id", cn.AbrirConexion()))
+            {
+                cmd.Parameters.AddWithValue("@id", UId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string username = Convert.ToString(reader["username"]);
+                        string nombre = Convert.ToString(reader["nombre"]);
+                        string nivel = Convert.ToString(reader["nivel"]);
+                        editar.Add($"{username}, {nombre}, {nivel}");
+                    }
+                }
+            }
+            cn.CerrarConexion();
+            return editar.ToArray();
+        }
+
         public static string[] buscarEditarOperador(int oId)
         {
             List<string> editar = new List<string>();
