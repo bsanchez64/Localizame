@@ -118,7 +118,24 @@ namespace Localizame.modelo
             return propietarios;
         }
 
+        public static List<string> llenarGeocercasEditar()
+        {
+            List<string> propietarios = new List<string>();
+            cmd = new SqlCommand("SELECT propietario FROM vehiculos GROUP BY propietario", cn.AbrirConexion());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
 
+            using (da)
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    propietarios.Add(row["propietario"].ToString());
+                }
+            }
+            cn.CerrarConexion();
+            return propietarios;
+        }
         public static double ConvertirCoordenada1dg(double coordinate)
         {
             string coordinateString = coordinate.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -292,6 +309,70 @@ namespace Localizame.modelo
             cn.CerrarConexion();
             return editar.ToArray();
         }
+
+        public static int validarExistencia(string cadena, string valorBuscar)
+        {
+            SqlCommand checkCmd = new SqlCommand(cadena, cn.AbrirConexion());
+            checkCmd.Parameters.AddWithValue("@valor", valorBuscar);
+            int count = (int)checkCmd.ExecuteScalar();
+            return count;
+        }
+
+        public static void llenarDataViewOperadores(DataGridView gridVehiculos)
+        {
+            try
+            {
+                cmd = new SqlCommand("SELECT * FROM Operadores", cn.AbrirConexion());
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gridVehiculos.DataSource = dt;
+                cn.CerrarConexion();
+            }
+            catch (Exception)
+            {
+            }
+        }
+        public static string[] buscarEditarUsuario()
+        {
+            var uId = getIdUsuario();
+            List<string> editar = new List<string>();
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM Users WHERE Id=@id", cn.AbrirConexion()))
+            {
+                cmd.Parameters.AddWithValue("@id", uId);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string username = Convert.ToString(reader["username"]);
+                        string nombre = Convert.ToString(reader["nombre"]);
+                        editar.Add($"{username}, {nombre}");
+                    }
+                }
+            }
+            cn.CerrarConexion();
+            return editar.ToArray();
+        }
+
+        public static string[] buscarEditarOperador(int oId)
+        {
+            List<string> editar = new List<string>();
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM Operadores WHERE cedula=@cedula", cn.AbrirConexion()))
+            {
+                cmd.Parameters.AddWithValue("@cedula", oId);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string nombre = Convert.ToString(reader["nombre"]);
+                        editar.Add($"{nombre}");
+                    }
+                }
+            }
+            cn.CerrarConexion();
+            return editar.ToArray();
+        }
+
 
 
     }
