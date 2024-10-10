@@ -83,7 +83,8 @@ namespace Localizame.vista
 
         private void pnlUsuarios_MouseClick(object sender, MouseEventArgs e)
         {
-
+            frmUsuarios frmUsuarios = new frmUsuarios();
+            frmUsuarios.ShowDialog();
         }
 
         private void pnlVehiculos_MouseClick(object sender, MouseEventArgs e)
