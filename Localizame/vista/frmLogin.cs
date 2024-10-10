@@ -41,6 +41,8 @@ namespace Localizame.vista
 
         private void btnSesionOn_Click(object sender, EventArgs e)
         {
+
+            Cursor.Current = Cursors.WaitCursor;
             user = txtUsuario.Text;
             password = txtPassword.Text;
 
@@ -50,13 +52,16 @@ namespace Localizame.vista
             if (string.IsNullOrEmpty(user))
             {
                 loading.Close();
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show("Debes ingresar un nombre de usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
             else
             {
                 if (string.IsNullOrEmpty(password))
                 {
                     loading.Close();
+                    Cursor.Current = Cursors.Default;
                     MessageBox.Show("Debes ingresar la contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
@@ -84,6 +89,7 @@ namespace Localizame.vista
                                 funciones_generales.setIdUsuario(idDb);
                                 funciones_generales.setNivel(nivelDb);
                                 //MessageBox.Show("Bienvenido, " + nombreDb);
+                                Cursor.Current = Cursors.Default;
                                 loading.Close();
                                 this.Hide();
                                 new frmMenu().ShowDialog();
