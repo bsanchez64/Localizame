@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsuarios));
             label1 = new Label();
             btnCerrar = new Button();
             gridUsuarios = new DataGridView();
@@ -43,9 +44,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(12, 7);
+            label1.Location = new Point(14, 9);
             label1.Name = "label1";
-            label1.Size = new Size(147, 21);
+            label1.Size = new Size(183, 28);
             label1.TabIndex = 7;
             label1.Text = "Gestión de usuarios";
             // 
@@ -55,10 +56,9 @@
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(381, 8);
-            btnCerrar.Margin = new Padding(3, 2, 3, 2);
+            btnCerrar.Location = new Point(456, 12);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(21, 22);
+            btnCerrar.Size = new Size(24, 29);
             btnCerrar.TabIndex = 8;
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
@@ -74,13 +74,12 @@
             gridUsuarios.CellBorderStyle = DataGridViewCellBorderStyle.SunkenHorizontal;
             gridUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridUsuarios.Columns.AddRange(new DataGridViewColumn[] { Editar, Eliminar });
-            gridUsuarios.Location = new Point(3, 34);
-            gridUsuarios.Margin = new Padding(3, 2, 3, 2);
+            gridUsuarios.Location = new Point(14, 57);
             gridUsuarios.Name = "gridUsuarios";
             gridUsuarios.ReadOnly = true;
             gridUsuarios.RowHeadersVisible = false;
             gridUsuarios.RowHeadersWidth = 51;
-            gridUsuarios.Size = new Size(408, 277);
+            gridUsuarios.Size = new Size(466, 369);
             gridUsuarios.TabIndex = 9;
             gridUsuarios.CellClick += gridUsuarios_CellClick;
             // 
@@ -91,7 +90,7 @@
             Editar.MinimumWidth = 6;
             Editar.Name = "Editar";
             Editar.ReadOnly = true;
-            Editar.Width = 43;
+            Editar.Width = 54;
             // 
             // Eliminar
             // 
@@ -100,17 +99,16 @@
             Eliminar.MinimumWidth = 6;
             Eliminar.Name = "Eliminar";
             Eliminar.ReadOnly = true;
-            Eliminar.Width = 56;
+            Eliminar.Width = 69;
             // 
             // btnNuevoUs
             // 
             btnNuevoUs.BackColor = SystemColors.ActiveCaptionText;
             btnNuevoUs.FlatStyle = FlatStyle.Popup;
             btnNuevoUs.ForeColor = SystemColors.ControlLightLight;
-            btnNuevoUs.Location = new Point(1, 331);
-            btnNuevoUs.Margin = new Padding(3, 2, 3, 2);
+            btnNuevoUs.Location = new Point(11, 442);
             btnNuevoUs.Name = "btnNuevoUs";
-            btnNuevoUs.Size = new Size(410, 22);
+            btnNuevoUs.Size = new Size(469, 29);
             btnNuevoUs.TabIndex = 10;
             btnNuevoUs.Text = "Nuevo usuario";
             btnNuevoUs.UseVisualStyleBackColor = false;
@@ -118,17 +116,20 @@
             // 
             // frmUsuarios
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.backsolo;
-            ClientSize = new Size(414, 364);
+            ClientSize = new Size(497, 489);
             Controls.Add(btnNuevoUs);
             Controls.Add(gridUsuarios);
             Controls.Add(btnCerrar);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmUsuarios";
-            Text = "frmUsuarios";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Gestión de usuarios";
             Load += frmUsuarios_Load;
             MouseMove += frmUsuarios_MouseMove;
             ((System.ComponentModel.ISupportInitialize)gridUsuarios).EndInit();

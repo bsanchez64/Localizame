@@ -36,7 +36,9 @@ namespace Localizame.vista
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            frmMenuSoftware frmMenuSoftware = new frmMenuSoftware();
+            this.Hide();
+            frmMenuSoftware.ShowDialog();
         }
 
         private void frmUsuarios_MouseMove(object sender, MouseEventArgs e)

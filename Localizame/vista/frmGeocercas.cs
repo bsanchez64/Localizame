@@ -9,6 +9,9 @@ using Localizame.modelo;
 using System.Data;
 using Localizame.controlador;
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Forms;
 
 namespace Localizame.vista
 {
@@ -17,6 +20,7 @@ namespace Localizame.vista
 
         GMarkerGoogle marker;
         GMapOverlay markerOverlay;
+        private GMapOverlay Geocerca = new GMapOverlay("Geocerca");
         connection cn = new connection();
         SqlDataAdapter da;
         SqlCommand cmd;
@@ -30,13 +34,42 @@ namespace Localizame.vista
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; 
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
         public frmGeocercas()
         {
             InitializeComponent();
+        }
+
+        private void dibujarGeocerca()
+        {
+            Geocerca.Polygons.Clear();
+            List<PointLatLng> puntos = new List<PointLatLng>();
+
+            double lng, lat;
+
+            for (int filas = 0; filas < dataGridView1.Rows.Count; filas++)
+            {
+                lat = Convert.ToDouble(dataGridView1.Rows[filas].Cells[1].Value);
+                lng = Convert.ToDouble(dataGridView1.Rows[filas].Cells[2].Value);
+                puntos.Add(new PointLatLng(lat, lng));
+            }
+
+            GMapPolygon geocercaPuntos = new GMapPolygon(puntos, "Geocerca");
+
+            if (!gMapControl1.Overlays.Contains(Geocerca))
+            {
+                gMapControl1.Overlays.Add(Geocerca);
+            }
+
+            Geocerca.Polygons.Add(geocercaPuntos);
+
+            gMapControl1.Refresh();
+
+            gMapControl1.Zoom = gMapControl1.Zoom + 1;
+            gMapControl1.Zoom = gMapControl1.Zoom - 1;
         }
 
 
@@ -47,7 +80,7 @@ namespace Localizame.vista
             dt.Columns.Add(new DataColumn("Lat", typeof(double)));
             dt.Columns.Add(new DataColumn("Long", typeof(double)));
 
-            dt.Rows.Add("Ubicacion Inicial", LatInicial, LngInicial);
+            dt.Rows.Add("Ubicación Inicial", LatInicial, LngInicial);
             dataGridView1.DataSource = dt;
 
             dataGridView1.Columns[1].Visible = false;
@@ -67,7 +100,7 @@ namespace Localizame.vista
             marker = new GMarkerGoogle(new PointLatLng(LatInicial, LngInicial), GMarkerGoogleType.green);
 
             marker.ToolTipMode = MarkerTooltipMode.Always;
-            marker.ToolTipText = string.Format("Ubicacion: \n Latitud: {0} \n Longitud: {1}", LatInicial, LngInicial);
+            marker.ToolTipText = string.Format("Ubicación: \n Latitud: {0} \n Longitud: {1}", LatInicial, LngInicial);
 
             markerOverlay.Markers.Add(marker);
             gMapControl1.Overlays.Add(markerOverlay);
@@ -114,8 +147,8 @@ namespace Localizame.vista
             if (marker == null)
             {
                 marker = new GMarkerGoogle(new PointLatLng(lat, lng), GMarkerGoogleType.green);
-                markerOverlay.Markers.Add(marker); 
-                gMapControl1.Overlays.Add(markerOverlay); 
+                markerOverlay.Markers.Add(marker);
+                gMapControl1.Overlays.Add(markerOverlay);
             }
 
             marker.Position = new PointLatLng(lat, lng);
@@ -130,13 +163,34 @@ namespace Localizame.vista
             }
             else
             {
-                dt.Rows.Add(txtDescripcion.Text, txtLatitud.Text, txtLongitud.Text);// agregar a la tabla
+
+                if (string.IsNullOrEmpty(txtLatitud.Text) || string.IsNullOrEmpty(txtLongitud.Text))
+                {
+                    MessageBox.Show("Debes seleccionar una ubicación en el mapa");
+                }
+                else
+                {
+                    dt.Rows.Add(txtDescripcion.Text, txtLatitud.Text, txtLongitud.Text);// agregar a la tabla
+
+                    dibujarGeocerca();
+
+                }
             }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.RemoveAt(filaSeleccionada);
+            try
+            {
+               dataGridView1.Rows.RemoveAt(filaSeleccionada);
+               dibujarGeocerca();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
+            }
+
+
         }
 
         bool vai = false;
@@ -168,7 +222,7 @@ namespace Localizame.vista
 
         private void btnGeocerca_Click(object sender, EventArgs e)
         {
-            GMapOverlay Geocerca = new GMapOverlay("Geocerca");
+            Geocerca.Polygons.Clear();
             List<PointLatLng> puntos = new List<PointLatLng>();
 
             double lng, lat;
@@ -187,8 +241,16 @@ namespace Localizame.vista
             }
 
             GMapPolygon geocercaPuntos = new GMapPolygon(puntos, "Geocerca");
+           
+
+            if (!gMapControl1.Overlays.Contains(Geocerca))
+            {
+                gMapControl1.Overlays.Add(Geocerca);
+            }
+
             Geocerca.Polygons.Add(geocercaPuntos);
-            gMapControl1.Overlays.Add(Geocerca);
+
+            gMapControl1.Refresh();
 
             gMapControl1.Zoom = gMapControl1.Zoom + 1;
             gMapControl1.Zoom = gMapControl1.Zoom - 1;
@@ -197,19 +259,47 @@ namespace Localizame.vista
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
-            {
-                txtDescripcion.Text = dataGridView1.Rows[filaSeleccionada].Cells[0].Value.ToString();
-                txtLatitud.Text = dataGridView1.Rows[filaSeleccionada].Cells[1].Value.ToString();
-                txtLongitud.Text = dataGridView1.Rows[filaSeleccionada].Cells[2].Value.ToString();
 
-                cmd = new SqlCommand("INSERT INTO Geocercas (nombrePoligono, latitud, longitud) VALUES (@nombrePoligono, @latitud, @longitud)", cn.AbrirConexion());
-                cmd.Parameters.AddWithValue("@nombrePoligono", txtDescripcion.Text);
-                cmd.Parameters.AddWithValue("@latitud", txtLatitud.Text);
-                cmd.Parameters.AddWithValue("@longitud", txtLongitud.Text);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Hecho");
+            if ((dataGridView1.Rows.Count <=3 ))
+            {
+                return;
             }
+
+            int filasAfectadas = 0;
+            string query = "INSERT INTO Geocercas (nombrePoligono, latitud, longitud, idUsuario) VALUES (@nombrePoligono, @latitud, @longitud, @idUsuario)";
+            SqlCommand cmd = new SqlCommand(query, cn.AbrirConexion());
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                cmd.Parameters.Clear();
+
+                string latitudInt = Convert.ToString(row.Cells["Lat"].Value);
+                string longitudInt = Convert.ToString(row.Cells["Long"].Value);
+
+                cmd.Parameters.AddWithValue("@nombrePoligono", Convert.ToString(row.Cells["Descripción"].Value));
+                cmd.Parameters.AddWithValue("@latitud", latitudInt);
+                cmd.Parameters.AddWithValue("@longitud", longitudInt);
+                cmd.Parameters.AddWithValue("@idUsuario", 1);
+
+                filasAfectadas = cmd.ExecuteNonQuery();
+            }
+
+            if (filasAfectadas > 0)
+            {
+                MessageBox.Show("Se ingresaron los datos satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No se pudo ingresar los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+            cn.CerrarConexion();
+
+
+
         }
+
+      
     }
 }

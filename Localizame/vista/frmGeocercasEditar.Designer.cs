@@ -1,6 +1,6 @@
 ﻿namespace Localizame.vista
 {
-    partial class loading
+    partial class frmGeocercasEditar
     {
         /// <summary>
         /// Required designer variable.
@@ -28,28 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loading));
+            cbxGeocercas = new ComboBox();
             SuspendLayout();
             // 
-            // loading
+            // cbxGeocercas
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            cbxGeocercas.FormattingEnabled = true;
+            cbxGeocercas.Location = new Point(102, 46);
+            cbxGeocercas.Name = "cbxGeocercas";
+            cbxGeocercas.Size = new Size(151, 28);
+            cbxGeocercas.TabIndex = 0;
+            // 
+            // frmGeocercasEditar
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(175, 47);
-            FormBorderStyle = FormBorderStyle.None;
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "loading";
-            ShowIcon = false;
-            ShowInTaskbar = false;
-            Text = "loading";
-            UseWaitCursor = true;
-            Load += loading_Load;
+            ClientSize = new Size(800, 450);
+            Controls.Add(cbxGeocercas);
+            Name = "frmGeocercasEditar";
+            Text = "frmGeocercasEditar";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private ComboBox cbxGeocercas;
     }
 }
