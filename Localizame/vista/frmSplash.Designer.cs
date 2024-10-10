@@ -42,20 +42,23 @@
             panel1.BackgroundImage = Properties.Resources.logo;
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(5, 7);
+            panel1.Location = new Point(4, 5);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(196, 231);
+            panel1.Size = new Size(172, 173);
             panel1.TabIndex = 0;
+            panel1.UseWaitCursor = true;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(29, 171);
+            label1.Location = new Point(25, 128);
             label1.Name = "label1";
-            label1.Size = new Size(146, 20);
+            label1.Size = new Size(116, 15);
             label1.TabIndex = 0;
             label1.Text = "Cargando aplicación";
+            label1.UseWaitCursor = true;
             // 
             // timer1
             // 
@@ -65,16 +68,18 @@
             // 
             // frmSplash
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.backsolo;
-            ClientSize = new Size(209, 250);
+            ClientSize = new Size(183, 188);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmSplash";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Localizame";
+            UseWaitCursor = true;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
