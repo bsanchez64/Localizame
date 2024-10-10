@@ -121,8 +121,9 @@ namespace Localizame.modelo
         public static List<string> llenarGeocercasEditar()
         {
             List<string> propietarios = new List<string>();
-            cmd = new SqlCommand("SELECT propietario FROM vehiculos GROUP BY propietario", cn.AbrirConexion());
+            cmd = new SqlCommand("SELECT nombrePoligono FROM Geocercas GROUP BY nombrePoligono", cn.AbrirConexion());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
+            propietarios.Add("Selecciona una opción");
 
             using (da)
             {
@@ -130,12 +131,13 @@ namespace Localizame.modelo
                 da.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                 {
-                    propietarios.Add(row["propietario"].ToString());
+                    propietarios.Add(row["nombrePoligono"].ToString());
                 }
             }
             cn.CerrarConexion();
             return propietarios;
         }
+
         public static double ConvertirCoordenada1dg(double coordinate)
         {
             string coordinateString = coordinate.ToString(System.Globalization.CultureInfo.InvariantCulture);
