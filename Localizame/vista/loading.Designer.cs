@@ -33,17 +33,19 @@
             // 
             // loading
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(200, 63);
+            ClientSize = new Size(175, 47);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "loading";
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "loading";
+            UseWaitCursor = true;
             Load += loading_Load;
             ResumeLayout(false);
         }

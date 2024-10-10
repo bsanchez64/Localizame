@@ -43,7 +43,7 @@
             label4 = new Label();
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
-            btnGeocerca = new Button();
+            btnGuardar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -109,10 +109,10 @@
             btnAgregar.BackColor = Color.Black;
             btnAgregar.FlatStyle = FlatStyle.Popup;
             btnAgregar.ForeColor = Color.White;
-            btnAgregar.Location = new Point(782, 304);
-            btnAgregar.Margin = new Padding(3, 4, 3, 4);
+            btnAgregar.Location = new Point(769, 267);
+            btnAgregar.Margin = new Padding(3, 5, 3, 5);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(103, 31);
+            btnAgregar.Size = new Size(152, 31);
             btnAgregar.TabIndex = 12;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = false;
@@ -123,10 +123,10 @@
             btnEliminar.BackColor = Color.Black;
             btnEliminar.FlatStyle = FlatStyle.Popup;
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(891, 304);
-            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.Location = new Point(941, 267);
+            btnEliminar.Margin = new Padding(3, 5, 3, 5);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(103, 31);
+            btnEliminar.Size = new Size(152, 31);
             btnEliminar.TabIndex = 13;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
@@ -138,7 +138,7 @@
             btnAtras.FlatStyle = FlatStyle.Popup;
             btnAtras.ForeColor = Color.White;
             btnAtras.Location = new Point(3, 15);
-            btnAtras.Margin = new Padding(3, 4, 3, 4);
+            btnAtras.Margin = new Padding(3, 5, 3, 5);
             btnAtras.Name = "btnAtras";
             btnAtras.Size = new Size(103, 31);
             btnAtras.TabIndex = 14;
@@ -148,34 +148,36 @@
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(794, 88);
-            txtDescripcion.Margin = new Padding(3, 4, 3, 4);
+            txtDescripcion.Location = new Point(770, 88);
+            txtDescripcion.Margin = new Padding(3, 5, 3, 5);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(313, 27);
+            txtDescripcion.Size = new Size(323, 27);
             txtDescripcion.TabIndex = 15;
             // 
             // txtLatitud
             // 
-            txtLatitud.Location = new Point(794, 153);
-            txtLatitud.Margin = new Padding(3, 4, 3, 4);
+            txtLatitud.Enabled = false;
+            txtLatitud.Location = new Point(770, 153);
+            txtLatitud.Margin = new Padding(3, 5, 3, 5);
             txtLatitud.Name = "txtLatitud";
-            txtLatitud.Size = new Size(313, 27);
+            txtLatitud.Size = new Size(323, 27);
             txtLatitud.TabIndex = 16;
             // 
             // txtLongitud
             // 
-            txtLongitud.Location = new Point(794, 225);
-            txtLongitud.Margin = new Padding(3, 4, 3, 4);
+            txtLongitud.Enabled = false;
+            txtLongitud.Location = new Point(770, 220);
+            txtLongitud.Margin = new Padding(3, 5, 3, 5);
             txtLongitud.Name = "txtLongitud";
-            txtLongitud.Size = new Size(313, 27);
+            txtLongitud.Size = new Size(323, 27);
             txtLongitud.TabIndex = 17;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.BackColor = Color.Black;
+            label2.BackColor = Color.Transparent;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(794, 64);
+            label2.Location = new Point(770, 64);
             label2.Name = "label2";
             label2.Size = new Size(87, 20);
             label2.TabIndex = 18;
@@ -185,9 +187,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.BackColor = Color.Black;
+            label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(794, 129);
+            label3.Location = new Point(770, 129);
             label3.Name = "label3";
             label3.Size = new Size(55, 20);
             label3.TabIndex = 19;
@@ -196,9 +198,9 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.BackColor = Color.Black;
+            label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(794, 201);
+            label4.Location = new Point(770, 192);
             label4.Name = "label4";
             label4.Size = new Size(68, 20);
             label4.TabIndex = 20;
@@ -207,14 +209,18 @@
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(769, 368);
+            dataGridView1.Location = new Point(769, 323);
             dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(338, 280);
+            dataGridView1.Size = new Size(324, 280);
             dataGridView1.TabIndex = 21;
             dataGridView1.CellMouseClick += SeleccionarRegistro;
             // 
@@ -233,19 +239,19 @@
             panel1.MouseMove += panel1_MouseMove;
             panel1.MouseUp += panel1_MouseUp;
             // 
-            // btnGeocerca
+            // btnGuardar
             // 
-            btnGeocerca.BackColor = Color.Black;
-            btnGeocerca.FlatStyle = FlatStyle.Popup;
-            btnGeocerca.ForeColor = Color.White;
-            btnGeocerca.Location = new Point(1005, 304);
-            btnGeocerca.Margin = new Padding(3, 4, 3, 4);
-            btnGeocerca.Name = "btnGeocerca";
-            btnGeocerca.Size = new Size(103, 31);
-            btnGeocerca.TabIndex = 23;
-            btnGeocerca.Text = "Geocerca";
-            btnGeocerca.UseVisualStyleBackColor = false;
-            btnGeocerca.Click += btnGeocerca_Click;
+            btnGuardar.BackColor = Color.Black;
+            btnGuardar.FlatStyle = FlatStyle.Popup;
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(769, 614);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(324, 31);
+            btnGuardar.TabIndex = 24;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // frmGeocercas
             // 
@@ -254,7 +260,7 @@
             BackgroundImage = Properties.Resources.backsolo;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1121, 665);
-            Controls.Add(btnGeocerca);
+            Controls.Add(btnGuardar);
             Controls.Add(panel1);
             Controls.Add(dataGridView1);
             Controls.Add(label4);
@@ -294,6 +300,6 @@
         private Label label4;
         private DataGridView dataGridView1;
         private Panel panel1;
-        private Button btnGeocerca;
+        private Button btnGuardar;
     }
 }

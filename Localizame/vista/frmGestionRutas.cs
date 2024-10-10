@@ -1,20 +1,8 @@
-﻿using Localizame.modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using GMap.NET;
+﻿using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using Localizame.controlador;
-using System.Diagnostics;
+using Localizame.modelo;
 
 namespace Localizame.vista
 {
@@ -34,7 +22,8 @@ namespace Localizame.vista
 
         public int xClic, yClic;
 
-        protected override CreateParams CreateParams{
+        protected override CreateParams CreateParams
+        {
             get
             {
                 CreateParams cp = base.CreateParams;
@@ -42,12 +31,13 @@ namespace Localizame.vista
                 return cp;
             }
         }
-    
 
-    private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+
+        private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
             item.ToolTipMode = MarkerTooltipMode.Always;
-            Task.Delay(3000).ContinueWith(t => {
+            Task.Delay(3000).ContinueWith(t =>
+            {
                 this.Invoke(new Action(() => item.ToolTipMode = MarkerTooltipMode.Never));
             });
         }
@@ -109,12 +99,11 @@ namespace Localizame.vista
             fechaFinal = dtpFechaFinal.Value;
             markersOverlay.Markers.Clear();
             gMapControl1.Refresh();
-            gMapControl1.Position = new PointLatLng(LatInicial, LngInicial);
 
 
             if (vh == "Selecciona una opcion")
             {
-                MessageBox.Show("Debes seleccionar un vehiculo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debes seleccionar un vehículo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -137,7 +126,7 @@ namespace Localizame.vista
                         GMapMarker marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.red_dot);
 
                         marker.ToolTipMode = MarkerTooltipMode.Never;
-                        marker.ToolTipText = string.Format("Ubicacion: \n Latitud: {0} \n Longitud: {1} \n Fecha y hora: {2}", latitud, longitud, fechaHora);
+                        marker.ToolTipText = string.Format("Ubicación: \n Latitud: {0} \n Longitud: {1} \n Fecha y hora: {2}", latitud, longitud, fechaHora);
                         markersOverlay.Markers.Add(marker);
                     }
                 }
@@ -163,9 +152,9 @@ namespace Localizame.vista
             gMapControl1.Refresh();
 
 
-            if (vh == "Selecciona una opcion")
+            if (vh == "Selecciona una opción")
             {
-                MessageBox.Show("Debes seleccionar un vehiculo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debes seleccionar un vehículo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -206,6 +195,31 @@ namespace Localizame.vista
             }
         }
 
-        
+        private void btnSatelite_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
+
+        }
+
+        private void btnOriginal_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+        }
+
+        private void btnRelieve_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMapProviders.GoogleTerrainMap;
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            trackZoom.Value = Convert.ToInt32(gMapControl1.Zoom);
+        }
+
+        private void trackZoom_ValueChanged(object sender, EventArgs e)
+        {
+            gMapControl1.Zoom = trackZoom.Value;
+        }
     }
 }

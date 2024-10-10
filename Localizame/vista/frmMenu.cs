@@ -1,13 +1,4 @@
 ﻿using Localizame.modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Localizame.vista
 {
@@ -20,7 +11,7 @@ namespace Localizame.vista
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; 
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
@@ -37,6 +28,7 @@ namespace Localizame.vista
             {
                 lblUserPlat.Location = new Point(lblUserPlat.Location.X - 20, lblUserPlat.Location.Y);
                 lblUserPlat.Text = "Gestionar \nPlataforma";
+
             }
             else
             {
@@ -78,18 +70,23 @@ namespace Localizame.vista
         }
         private void pnlGeocercas_MouseClick(object sender, MouseEventArgs e)
         {
-            new frmGeocercas().Show(this);
+            new frmMenuGeocercas().Show(this);
         }
 
         private void pnlGestionSoft_MouseClick(object sender, MouseEventArgs e)
         {
             if (funciones_generales.getNivel() == "administrador")
             {
-                MessageBox.Show("aca iría el menú de administrador");
+                frmMenuSoftware frmMenuSoftware = new frmMenuSoftware();
+                this.Hide();
+                frmMenuSoftware.ShowDialog();
+                
             }
             else
             {
-                MessageBox.Show("aca iría el perfil del usuario");
+                frmPerfilUsuario frmPerfilUsuario = new frmPerfilUsuario();
+                this.Hide();
+                frmPerfilUsuario.ShowDialog();
             }
         }
 
@@ -138,6 +135,6 @@ namespace Localizame.vista
 
         }
 
-       
+
     }
 }

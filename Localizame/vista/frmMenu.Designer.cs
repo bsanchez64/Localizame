@@ -188,7 +188,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmMenu";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "frmMenu";
+            Text = "Menú principal";
             Load += frmMenu_Load;
             MouseMove += frmMenu_MouseMove;
             pnlGestionSoft.ResumeLayout(false);
