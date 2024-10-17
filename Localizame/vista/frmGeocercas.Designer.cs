@@ -137,10 +137,10 @@
             btnAtras.BackColor = Color.Black;
             btnAtras.FlatStyle = FlatStyle.Popup;
             btnAtras.ForeColor = Color.White;
-            btnAtras.Location = new Point(3, 15);
+            btnAtras.Location = new Point(13, 15);
             btnAtras.Margin = new Padding(3, 5, 3, 5);
             btnAtras.Name = "btnAtras";
-            btnAtras.Size = new Size(103, 31);
+            btnAtras.Size = new Size(127, 31);
             btnAtras.TabIndex = 14;
             btnAtras.Text = "< Volver atrás";
             btnAtras.UseVisualStyleBackColor = false;

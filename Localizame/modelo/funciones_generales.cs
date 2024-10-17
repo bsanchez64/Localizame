@@ -174,8 +174,7 @@ namespace Localizame.modelo
 
         public DateTime QuitarHoras(DateTime dateTime)
         {
-            // Establecer la hora a medianoche
-            return dateTime.Date; // Esto devuelve solo la fecha
+            return dateTime.Date; 
         }
 
         public static string[] cargarMarcadores(string placa, DateTime fechaInicial, DateTime fechaFinal)
@@ -207,6 +206,45 @@ namespace Localizame.modelo
 
             cn.CerrarConexion();
             return posiciones.ToArray();
+        }
+
+        public static string[] cargarMarcadoresGeocercas(string nombrePoligono)
+        {
+
+            cmd = new SqlCommand("SELECT * FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
+            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<string> posiciones = new List<string>();
+
+                while (reader.Read())
+                {
+                    double latitud = Convert.ToDouble(reader["latitud"]);
+                    double longitud = Convert.ToDouble(reader["longitud"]);
+                    posiciones.Add($"{latitud}/ {longitud}");
+                }
+          
+            cn.CerrarConexion();
+            return posiciones.ToArray();
+        }
+
+        public static void llenarDataViewGeocercas(DataGridView gridGeocercas, string nombrePoligono)
+        {
+            try
+            {
+                cmd = new SqlCommand("SELECT nombrePoligono, latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gridGeocercas.DataSource = dt;
+                cn.CerrarConexion();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
 
         public static string[] cargarUltimaPosicion(string placa)
@@ -374,6 +412,8 @@ namespace Localizame.modelo
             cn.CerrarConexion();
             return editar.ToArray();
         }
+
+
 
 
 
