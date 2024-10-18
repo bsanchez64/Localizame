@@ -1,7 +1,7 @@
-﻿using GMap.NET.WindowsForms.Markers;
+﻿using Microsoft.Data.SqlClient;
+using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
-using GMap.NET;
-using Localizame.modelo;
+using Localizame.controlador;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,14 +11,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GMap.NET;
 using GMap.NET.MapProviders;
-using System.Diagnostics;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using Localizame.modelo;
 
 namespace Localizame.vista
 {
-    public partial class frmGeocercasEditar : Form
+    public partial class frmGeocercaVer : Form
     {
+        string nombreGeocerca;
         //marcadores de google
         GMarkerGoogle marker;
         GMapOverlay markerOverlay;
@@ -27,7 +28,8 @@ namespace Localizame.vista
 
         //datetable
         DataTable dt;
-
+        public static connection cn = new connection();
+        public static SqlCommand cmd;
         double LatInicial = 6.207945;
         double LngInicial = -75.5928211;
         public int xClic, yClic;
@@ -41,7 +43,6 @@ namespace Localizame.vista
                 return cp;
             }
         }
-
         private void dibujarGeocerca()
         {
             Geocerca.Polygons.Clear();
@@ -71,8 +72,9 @@ namespace Localizame.vista
             gMapControl1.Zoom = gMapControl1.Zoom - 1;
         }
 
-        public frmGeocercasEditar()
+        public frmGeocercaVer()
         {
+            InitializeComponent();
             InitializeComponent();
             cbxGeocercas.DataSource = funciones_generales.llenarGeocercasEditar();
             gMapControl1.DragButton = MouseButtons.Left;
@@ -93,7 +95,24 @@ namespace Localizame.vista
             gridGeocercas.Columns[2].Visible = false;
         }
 
-        private void frmGestionRutas_MouseMove(object sender, MouseEventArgs e)
+        private void frmGeocercaVer_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            frmMenuGeocercas frmMenuGeocercas = new frmMenuGeocercas();
+            this.Hide();
+            frmMenuGeocercas.ShowDialog();
+        }
+
+        private void frmGeocercaVer_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
             {
@@ -108,7 +127,12 @@ namespace Localizame.vista
             }
         }
 
-        private void txtDescripcion_TextChanged(object sender, EventArgs e)
+        private void gridGeocercas_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxGeocercas_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -147,21 +171,6 @@ namespace Localizame.vista
 
             gMapControl1.Zoom = 18;
             gMapControl1.Refresh();
-        }
-
-        private void frmGeocercasEditar_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAtras_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

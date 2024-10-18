@@ -138,6 +138,7 @@ namespace Localizame.modelo
             return propietarios;
         }
 
+
         public static double ConvertirCoordenada1dg(double coordinate)
         {
             string coordinateString = coordinate.ToString(System.Globalization.CultureInfo.InvariantCulture);

@@ -1,4 +1,5 @@
-﻿using GMap.NET.WindowsForms.Markers;
+﻿using Microsoft.Data.SqlClient;
+using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
 using Localizame.modelo;
@@ -14,11 +15,14 @@ using System.Windows.Forms;
 using GMap.NET.MapProviders;
 using System.Diagnostics;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using Localizame.controlador;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Localizame.vista
 {
-    public partial class frmGeocercasEditar : Form
+    public partial class frmGeocercaEliminar : Form
     {
+        string nombreGeocerca;
         //marcadores de google
         GMarkerGoogle marker;
         GMapOverlay markerOverlay;
@@ -27,7 +31,8 @@ namespace Localizame.vista
 
         //datetable
         DataTable dt;
-
+        public static connection cn = new connection();
+        public static SqlCommand cmd;
         double LatInicial = 6.207945;
         double LngInicial = -75.5928211;
         public int xClic, yClic;
@@ -70,8 +75,7 @@ namespace Localizame.vista
             gMapControl1.Zoom = gMapControl1.Zoom + 1;
             gMapControl1.Zoom = gMapControl1.Zoom - 1;
         }
-
-        public frmGeocercasEditar()
+        public frmGeocercaEliminar()
         {
             InitializeComponent();
             cbxGeocercas.DataSource = funciones_generales.llenarGeocercasEditar();
@@ -93,7 +97,19 @@ namespace Localizame.vista
             gridGeocercas.Columns[2].Visible = false;
         }
 
-        private void frmGestionRutas_MouseMove(object sender, MouseEventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            frmMenuGeocercas frmMenuGeocercas = new frmMenuGeocercas();
+            this.Hide();
+            frmMenuGeocercas.ShowDialog();
+        }
+
+        private void frmGeocercaEliminar_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
             {
@@ -106,11 +122,6 @@ namespace Localizame.vista
                 this.Top = this.Top + (e.Y);
 
             }
-        }
-
-        private void txtDescripcion_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cbxGeocercas_SelectedValueChanged(object sender, EventArgs e)
@@ -149,19 +160,28 @@ namespace Localizame.vista
             gMapControl1.Refresh();
         }
 
-        private void frmGeocercasEditar_Load(object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
+            
+            DialogResult dialogResult = MessageBox.Show("¿Esta seguro de borrar esta geocerca?", "Borrar Geocerca", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+            if (dialogResult == DialogResult.Yes)
+            {
+                nombreGeocerca = gridGeocercas.CurrentRow.Cells["nombrePoligono"].Value.ToString();
+                SqlCommand cmd = new SqlCommand("DELETE FROM Geocercas WHERE nombrePoligono IN (SELECT nombrePoligono FROM Geocercas GROUP BY nombrePoligono)", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@nombrePoligono", nombreGeocerca);
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                cbxGeocercas.Items.Remove(nombreGeocerca);
 
-        }
+                if (filasAfectadas > 0)
+                {
+                    MessageBox.Show("Se elimino la geocerca con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró ninguna geocerca con este nombre", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-        private void btnAtras_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-
+                }
+            }
         }
     }
 }
