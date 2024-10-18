@@ -41,6 +41,7 @@ namespace Localizame.vista
                 this.Invoke(new Action(() => item.ToolTipMode = MarkerTooltipMode.Never));
             });
         }
+
         public frmGestionRutas()
         {
             InitializeComponent();
@@ -214,7 +215,9 @@ namespace Localizame.vista
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            trackZoom.Value = Convert.ToInt32(gMapControl1.Zoom);
+         
+                trackZoom.Value = Convert.ToInt32(gMapControl1.Zoom);
+            
         }
 
         private void trackZoom_ValueChanged(object sender, EventArgs e)
