@@ -4,6 +4,7 @@ using System.Data;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Localizame.modelo
 {
@@ -233,7 +234,7 @@ namespace Localizame.modelo
         {
             try
             {
-                cmd = new SqlCommand("SELECT nombrePoligono, latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
+                cmd = new SqlCommand("SELECT id, nombrePoligono, latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
                 cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();

@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using GMap.NET.MapProviders;
 using System.Diagnostics;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Xml;
 
 namespace Localizame.vista
 {
@@ -31,6 +32,8 @@ namespace Localizame.vista
         double LatInicial = 6.207945;
         double LngInicial = -75.5928211;
         public int xClic, yClic;
+
+        int filaSeleccionada = 0;
 
         protected override CreateParams CreateParams
         {
@@ -51,8 +54,8 @@ namespace Localizame.vista
 
             for (int filas = 0; filas < gridGeocercas.Rows.Count; filas++)
             {
-                lat = Convert.ToDouble(gridGeocercas.Rows[filas].Cells[1].Value);
-                lng = Convert.ToDouble(gridGeocercas.Rows[filas].Cells[2].Value);
+                lat = Convert.ToDouble(gridGeocercas.Rows[filas].Cells[2].Value);
+                lng = Convert.ToDouble(gridGeocercas.Rows[filas].Cells[3].Value);
                 puntos.Add(new PointLatLng(lat, lng));
             }
 
@@ -83,15 +86,9 @@ namespace Localizame.vista
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 12;
             gMapControl1.AutoScroll = true;
-
-            dt = new DataTable();
-            dt.Columns.Add(new DataColumn("Descripción", typeof(string)));
-            dt.Columns.Add(new DataColumn("Lat", typeof(double)));
-            dt.Columns.Add(new DataColumn("Long", typeof(double)));
-            gridGeocercas.DataSource = dt;
-            gridGeocercas.Columns[1].Visible = false;
-            gridGeocercas.Columns[2].Visible = false;
         }
+
+
 
         private void frmGestionRutas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -117,7 +114,12 @@ namespace Localizame.vista
         {
             string valorCbx = cbxGeocercas.SelectedItem.ToString();
             string[] marcadores = funciones_generales.cargarMarcadoresGeocercas(valorCbx);
+
             funciones_generales.llenarDataViewGeocercas(gridGeocercas, valorCbx);
+            gridGeocercas.Columns[0].HeaderText = "ID";
+            gridGeocercas.Columns[1].HeaderText = "Nombre Polígono";
+            gridGeocercas.Columns[2].Visible = false;
+            gridGeocercas.Columns[3].Visible = false;
 
             markersOverlay.Markers.Clear();
 
@@ -149,19 +151,21 @@ namespace Localizame.vista
             gMapControl1.Refresh();
         }
 
-        private void frmGeocercasEditar_Load(object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
+            if (gridGeocercas.SelectedRows.Count > 0)
+            {
+                DataTable dataTable = (DataTable)gridGeocercas.DataSource;
+                int rowIndex = gridGeocercas.SelectedRows[0].Index;
+                dataTable.Rows[rowIndex].Delete();
+                dataTable.AcceptChanges();
+                gridGeocercas.DataSource = dataTable;
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para eliminar.");
+            }
 
-        }
 
-        private void btnAtras_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

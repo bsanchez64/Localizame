@@ -76,7 +76,7 @@
             btnGuardar.ForeColor = Color.White;
             btnGuardar.Location = new Point(683, 410);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(284, 23);
+            btnGuardar.Size = new Size(325, 31);
             btnGuardar.TabIndex = 36;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
@@ -87,7 +87,8 @@
             panel1.Controls.Add(btnCerrar);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(btnAtras);
-            panel1.Location = new Point(10, 2);
+            panel1.Location = new Point(12, 2);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(980, 44);
             panel1.TabIndex = 35;
@@ -134,17 +135,17 @@
             // gridGeocercas
             // 
             gridGeocercas.AllowUserToAddRows = false;
-            gridGeocercas.AllowUserToDeleteRows = false;
             gridGeocercas.AllowUserToResizeColumns = false;
             gridGeocercas.AllowUserToResizeRows = false;
             gridGeocercas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridGeocercas.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             gridGeocercas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridGeocercas.Location = new Point(682, 187);
             gridGeocercas.Name = "gridGeocercas";
             gridGeocercas.ReadOnly = true;
             gridGeocercas.RowHeadersVisible = false;
             gridGeocercas.RowHeadersWidth = 51;
-            gridGeocercas.Size = new Size(284, 210);
+            gridGeocercas.Size = new Size(324, 280);
             gridGeocercas.TabIndex = 34;
             // 
             // label4
@@ -152,7 +153,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(682, 95);
+            label4.Location = new Point(780, 127);
             label4.Name = "label4";
             label4.Size = new Size(102, 15);
             label4.TabIndex = 33;
@@ -171,8 +172,8 @@
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(682, 114);
-            txtDescripcion.Margin = new Padding(3, 4, 3, 4);
+            txtDescripcion.Location = new Point(780, 152);
+            txtDescripcion.Margin = new Padding(3, 5, 3, 5);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(283, 23);
             txtDescripcion.TabIndex = 28;
@@ -183,21 +184,22 @@
             btnEliminar.BackColor = Color.Black;
             btnEliminar.FlatStyle = FlatStyle.Popup;
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(832, 148);
-            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.Location = new Point(951, 198);
+            btnEliminar.Margin = new Padding(3, 5, 3, 5);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(133, 23);
             btnEliminar.TabIndex = 27;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnAgregar
             // 
             btnAgregar.BackColor = Color.Black;
             btnAgregar.FlatStyle = FlatStyle.Popup;
             btnAgregar.ForeColor = Color.White;
-            btnAgregar.Location = new Point(682, 148);
-            btnAgregar.Margin = new Padding(3, 4, 3, 4);
+            btnAgregar.Location = new Point(780, 198);
+            btnAgregar.Margin = new Padding(3, 5, 3, 5);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(133, 23);
             btnAgregar.TabIndex = 26;
@@ -212,7 +214,8 @@
             gMapControl1.GrayScaleMode = false;
             gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             gMapControl1.LevelsKeepInMemory = 5;
-            gMapControl1.Location = new Point(10, 52);
+            gMapControl1.Location = new Point(12, 69);
+            gMapControl1.Margin = new Padding(3, 4, 3, 4);
             gMapControl1.MarkersEnabled = true;
             gMapControl1.MaxZoom = 2;
             gMapControl1.MinZoom = 2;
@@ -235,7 +238,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.backsolo;
-            ClientSize = new Size(988, 508);
+            ClientSize = new Size(1129, 678);
             Controls.Add(btnGuardar);
             Controls.Add(panel1);
             Controls.Add(gridGeocercas);
