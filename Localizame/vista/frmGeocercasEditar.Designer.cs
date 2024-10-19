@@ -50,9 +50,9 @@
             // cbxGeocercas
             // 
             cbxGeocercas.FormattingEnabled = true;
-            cbxGeocercas.Location = new Point(781, 92);
+            cbxGeocercas.Location = new Point(779, 92);
             cbxGeocercas.Name = "cbxGeocercas";
-            cbxGeocercas.Size = new Size(322, 28);
+            cbxGeocercas.Size = new Size(323, 28);
             cbxGeocercas.TabIndex = 0;
             cbxGeocercas.SelectedValueChanged += cbxGeocercas_SelectedValueChanged;
             // 
@@ -80,6 +80,7 @@
             btnGuardar.TabIndex = 36;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // panel1
             // 
@@ -105,6 +106,7 @@
             btnCerrar.Size = new Size(24, 27);
             btnCerrar.TabIndex = 10;
             btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // label2
             // 
@@ -148,6 +150,7 @@
             gridGeocercas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridGeocercas.Size = new Size(325, 280);
             gridGeocercas.TabIndex = 34;
+            gridGeocercas.CellClick += gridGeocercas_CellClick;
             // 
             // label4
             // 
@@ -173,6 +176,7 @@
             // 
             // txtDescripcion
             // 
+            txtDescripcion.Enabled = false;
             txtDescripcion.Location = new Point(779, 152);
             txtDescripcion.Margin = new Padding(3, 5, 3, 5);
             txtDescripcion.Name = "txtDescripcion";
@@ -206,6 +210,7 @@
             btnAgregar.TabIndex = 26;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = false;
+            btnAgregar.Click += btnAgregar_Click;
             // 
             // gMapControl1
             // 
@@ -233,6 +238,7 @@
             gMapControl1.Size = new Size(750, 585);
             gMapControl1.TabIndex = 25;
             gMapControl1.Zoom = 0D;
+            gMapControl1.MouseDoubleClick += gMapControl1_MouseDoubleClick;
             // 
             // frmGeocercasEditar
             // 
