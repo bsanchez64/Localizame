@@ -306,9 +306,7 @@ namespace Localizame.vista
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
-            frmGeocercas frmGeocercas = new frmGeocercas();
             this.Hide();
-            frmGeocercas.ShowDialog();
         }
     }
 }

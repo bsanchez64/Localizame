@@ -232,6 +232,27 @@ namespace Localizame.modelo
             return posiciones.ToArray();
         }
 
+        public static string[] cargarMarcadoresPorID (string nombrePoligono)
+        {
+            string idUsuario = funciones_generales.getIdUsuario();
+            SqlCommand cmd = new SqlCommand("SELECT latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono AND idUsuario = @idUsuario", cn.AbrirConexion());
+            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<string> posiciones = new List<string>();
+
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add($"{latitud}/ {longitud}");
+            }
+
+            cn.CerrarConexion();
+            return posiciones.ToArray();
+        }
+
         public static List<(double latitud, double longitud)> cargarPoligonos(string nombrePoligono)
         {
             cmd = new SqlCommand("SELECT * FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
@@ -251,7 +272,26 @@ namespace Localizame.modelo
             return posiciones;
         }
 
-        
+        public static List<(double latitud, double longitud)> cargarPoligonosporId(string nombrePoligono)
+        {
+            string idUsuario = funciones_generales.getIdUsuario();
+            cmd = new SqlCommand("SELECT latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono AND idUsuario = @idUsuario", cn.AbrirConexion());
+            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<(double latitud, double longitud)> posiciones = new List<(double, double)>();
+
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add((latitud, longitud));
+            }
+
+            cn.CerrarConexion();
+            return posiciones;
+        }
+
 
         public static List<string> obtenerNombresPoligonos()
         {

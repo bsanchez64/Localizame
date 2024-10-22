@@ -49,7 +49,7 @@ namespace Localizame.vista
         public frmGeocercasEliminar()
         {
             InitializeComponent();
-            CargarGeocercas(); 
+            CargarGeocercas();
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.CanDragMap = true;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
@@ -62,12 +62,12 @@ namespace Localizame.vista
 
         private void CargarGeocercas()
         {
-            cbxGeocercas.Items.Clear(); 
-            var geocercas = funciones_generales.llenarGeocercasEditar(); 
+            cbxGeocercas.Items.Clear();
+            var geocercas = funciones_generales.llenarGeocercasEditar();
 
             foreach (var geocerca in geocercas)
             {
-                cbxGeocercas.Items.Add(geocerca); 
+                cbxGeocercas.Items.Add(geocerca);
             }
         }
 
@@ -145,7 +145,7 @@ namespace Localizame.vista
         }
 
         private void cbxGeocercas_SelectedValueChanged(object sender, EventArgs e)
-        {           
+        {
             if (cbxGeocercas.SelectedItem != null)
             {
                 string valorCbx = cbxGeocercas.SelectedItem.ToString();
@@ -154,29 +154,29 @@ namespace Localizame.vista
 
                 if (marcadores.Length > 0)
                 {
-                        GMapOverlay overlay = new GMapOverlay(valorCbx);
-                        
-                        List<(double latitud, double longitud)> posiciones = funciones_generales.cargarPoligonos(valorCbx);
-                        List<PointLatLng> puntosPoligono = new List<PointLatLng>();
+                    GMapOverlay overlay = new GMapOverlay(valorCbx);
 
-                        foreach (var (latitud, longitud) in posiciones)
-                        {
-                            GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
-                            overlay.Markers.Add(marker);
+                    List<(double latitud, double longitud)> posiciones = funciones_generales.cargarPoligonos(valorCbx);
+                    List<PointLatLng> puntosPoligono = new List<PointLatLng>();
 
-                            puntosPoligono.Add(new PointLatLng(latitud, longitud));
-                            gMapControl1.Position = new PointLatLng(latitud, longitud);
-                        }
+                    foreach (var (latitud, longitud) in posiciones)
+                    {
+                        GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
+                        overlay.Markers.Add(marker);
 
-                        GMapPolygon poligono = new GMapPolygon(puntosPoligono, valorCbx);
+                        puntosPoligono.Add(new PointLatLng(latitud, longitud));
+                        gMapControl1.Position = new PointLatLng(latitud, longitud);
+                    }
 
-                        poligono.Fill = new SolidBrush(Color.FromArgb(50, Color.Blue));
-                        poligono.Stroke = new Pen(Color.Blue, 2);
+                    GMapPolygon poligono = new GMapPolygon(puntosPoligono, valorCbx);
 
-                        overlay.Polygons.Add(poligono);
+                    poligono.Fill = new SolidBrush(Color.FromArgb(50, Color.Blue));
+                    poligono.Stroke = new Pen(Color.Blue, 2);
 
-                        gMapControl1.Overlays.Add(overlay);
-                    
+                    overlay.Polygons.Add(poligono);
+
+                    gMapControl1.Overlays.Add(overlay);
+
                     gMapControl1.Zoom = -12;
                     gMapControl1.Refresh();
                     gMapControl1.Zoom = 12;
@@ -189,7 +189,7 @@ namespace Localizame.vista
             if (cbxGeocercas.SelectedItem == null)
             {
                 MessageBox.Show("Por favor seleccione una geocerca antes de eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; 
+                return;
             }
 
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de borrar esta geocerca?", "Borrar Geocerca", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
@@ -212,6 +212,11 @@ namespace Localizame.vista
                 }
                 cn.CerrarConexion();
             }
+        }
+
+        private void frmGeocercasEliminar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

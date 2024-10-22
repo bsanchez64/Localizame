@@ -119,6 +119,7 @@
             pnlVerGeocercas.Name = "pnlVerGeocercas";
             pnlVerGeocercas.Size = new Size(150, 243);
             pnlVerGeocercas.TabIndex = 9;
+            pnlVerGeocercas.Click += pnlVerGeocercas_Click;
             pnlVerGeocercas.MouseLeave += pnlVerGeocercas_MouseLeave;
             pnlVerGeocercas.MouseHover += pnlVerGeocercas_MouseHover;
             // 
