@@ -36,6 +36,7 @@ namespace Localizame.vista
         double LatInicial = 6.207945;
         double LngInicial = -75.5928211;
         public int xClic, yClic;
+        private object marcadores;
 
         protected override CreateParams CreateParams
         {
@@ -51,8 +52,7 @@ namespace Localizame.vista
         {
             InitializeComponent();
             CargarGeocercas();
-            funciones_generales.getNivel();
-            funciones_generales.getIdUsuario();
+            
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.CanDragMap = true;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
@@ -104,79 +104,56 @@ namespace Localizame.vista
 
         private void cbxGeocercas_SelectedValueChanged(object sender, EventArgs e)
         {
+            markersOverlay.Markers.Clear();
+            string valorCbx = cbxGeocercas.SelectedItem.ToString();
+            List<(double latitud, double longitud)> posiciones;
+
             if (funciones_generales.getNivel() == "administrador")
             {
-                markersOverlay.Markers.Clear();
-                string valorCbx = cbxGeocercas.SelectedItem.ToString();
-                string[] marcadores = funciones_generales.cargarMarcadoresGeocercas(valorCbx);
-
-                if (marcadores.Length > 0)
-                {
-                    List<(double latitud, double longitud)> posiciones = funciones_generales.cargarPoligonos(valorCbx);
-                    List<PointLatLng> puntosPoligono = new List<PointLatLng>();
-
-                    foreach (var (latitud, longitud) in posiciones)
-                    {
-                        GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
-                        markersOverlay.Markers.Add(marker);
-                        puntosPoligono.Add(new PointLatLng(latitud, longitud));
-                        gMapControl1.Position = new PointLatLng(latitud, longitud);
-                    }
-                    if (puntosPoligono.Count > 0)
-                    {
-                        GMapPolygon poligono = new GMapPolygon(puntosPoligono, valorCbx)
-                        {
-                            Fill = new SolidBrush(Color.FromArgb(50, Color.Blue)),
-                            Stroke = new Pen(Color.Blue, 2)
-                        };
-                        markersOverlay.Polygons.Add(poligono);
-                    }
-                    gMapControl1.Overlays.Add(markersOverlay);
-
-                    gMapControl1.Zoom += 0.1;
-                    gMapControl1.Zoom -= 0.1;
-                }
+                posiciones = funciones_generales.cargarPoligonos(valorCbx);
             }
-
             else
             {
-                markersOverlay.Markers.Clear();
-                string valorCbx1 = cbxGeocercas.SelectedItem.ToString();
-                string[] marcadores1 = funciones_generales.cargarMarcadoresPorID(valorCbx1);
-
-                if (marcadores1.Length > 0)
-                {
-                    GMapOverlay overlay = new GMapOverlay(valorCbx1);
-
-                    List<(double latitud, double longitud)> posiciones = funciones_generales.cargarPoligonosporId(valorCbx1);
-                    List<PointLatLng> puntosPoligono = new List<PointLatLng>();
-
-                    foreach (var (latitud, longitud) in posiciones)
-                    {
-                        GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
-                        overlay.Markers.Add(marker);
-
-                        puntosPoligono.Add(new PointLatLng(latitud, longitud));
-                        gMapControl1.Position = new PointLatLng(latitud, longitud);
-                    }
-
-                    GMapPolygon poligono = new GMapPolygon(puntosPoligono, valorCbx1);
-
-                    poligono.Fill = new SolidBrush(Color.FromArgb(50, Color.Blue));
-                    poligono.Stroke = new Pen(Color.Blue, 2);
-
-                    overlay.Polygons.Add(poligono);
-
-                    gMapControl1.Overlays.Add(overlay);
-
-                    gMapControl1.Zoom = -12;
-                    gMapControl1.Refresh();
-                    gMapControl1.Zoom = 12;
-                }
+                posiciones = funciones_generales.cargarPoligonosporId(valorCbx);
             }
+
+            List<PointLatLng> puntosPoligono = new List<PointLatLng>();
+
+            foreach (var (latitud, longitud) in posiciones)
+            {
+                GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
+                markersOverlay.Markers.Add(marker);
+                puntosPoligono.Add(new PointLatLng(latitud, longitud));
+                gMapControl1.Position = new PointLatLng(latitud, longitud);
+            }
+
+            if (puntosPoligono.Count > 0)
+            {
+                GMapPolygon poligono = new GMapPolygon(puntosPoligono, valorCbx)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(50, Color.Blue)),
+                    Stroke = new Pen(Color.Blue, 2)
+                };
+                markersOverlay.Polygons.Add(poligono);
+            }
+
+            if (!gMapControl1.Overlays.Contains(markersOverlay))
+            {
+                gMapControl1.Overlays.Add(markersOverlay);
+            }
+
+            gMapControl1.Zoom = -11;
+            gMapControl1.Refresh();
+            gMapControl1.Zoom = 11;
+
         }
 
         private void frmGeocercasVer_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

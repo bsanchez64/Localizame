@@ -125,7 +125,15 @@ namespace Localizame.modelo
         public static List<string> llenarGeocercasEditar()
         {
             List<string> propietarios = new List<string>();
-            cmd = new SqlCommand("SELECT nombrePoligono FROM Geocercas GROUP BY nombrePoligono", cn.AbrirConexion());
+            if (funciones_generales.getNivel() == "administrador")
+            {
+                cmd = new SqlCommand("SELECT nombrePoligono FROM Geocercas GROUP BY nombrePoligono", cn.AbrirConexion());
+            }
+            else
+            {
+                cmd = new SqlCommand("SELECT nombrePoligono FROM Geocercas WHERE idUsuario=@idUsuario GROUP BY nombrePoligono", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@idUsuario", funciones_generales.getIdUsuario());
+            }
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             propietarios.Add("Selecciona una opción");
 
@@ -234,7 +242,7 @@ namespace Localizame.modelo
 
         public static string[] cargarMarcadoresPorID (string nombrePoligono)
         {
-            string idUsuario = funciones_generales.getIdUsuario();
+            string idUsuario = getIdUsuario();
             SqlCommand cmd = new SqlCommand("SELECT latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono AND idUsuario = @idUsuario", cn.AbrirConexion());
             cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
             cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
@@ -274,7 +282,7 @@ namespace Localizame.modelo
 
         public static List<(double latitud, double longitud)> cargarPoligonosporId(string nombrePoligono)
         {
-            string idUsuario = funciones_generales.getIdUsuario();
+            string idUsuario = getIdUsuario();
             cmd = new SqlCommand("SELECT latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono AND idUsuario = @idUsuario", cn.AbrirConexion());
             cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
             cmd.Parameters.AddWithValue("@idUsuario", idUsuario);

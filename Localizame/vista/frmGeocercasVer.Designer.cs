@@ -43,7 +43,7 @@
             btnCerrar.BackgroundImage = Properties.Resources.cerrar;
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(955, 13);
+            btnCerrar.Location = new Point(734, 12);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(21, 20);
             btnCerrar.TabIndex = 12;
@@ -72,7 +72,7 @@
             gMapControl1.GrayScaleMode = false;
             gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             gMapControl1.LevelsKeepInMemory = 5;
-            gMapControl1.Location = new Point(12, 57);
+            gMapControl1.Location = new Point(12, 115);
             gMapControl1.MarkersEnabled = true;
             gMapControl1.MaxZoom = 2;
             gMapControl1.MinZoom = 2;
@@ -86,7 +86,7 @@
             gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
             gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(743, 439);
+            gMapControl1.Size = new Size(743, 381);
             gMapControl1.TabIndex = 27;
             gMapControl1.Zoom = 0D;
             // 
@@ -96,18 +96,19 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 13F);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(449, 13);
+            label2.Location = new Point(366, 13);
             label2.Name = "label2";
             label2.Size = new Size(121, 25);
             label2.TabIndex = 28;
             label2.Text = "Ver geocercas";
+            label2.Click += label2_Click;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.White;
-            label5.Location = new Point(761, 57);
+            label5.Location = new Point(12, 57);
             label5.Name = "label5";
             label5.Size = new Size(126, 15);
             label5.TabIndex = 33;
@@ -116,7 +117,7 @@
             // cbxGeocercas
             // 
             cbxGeocercas.FormattingEnabled = true;
-            cbxGeocercas.Location = new Point(761, 85);
+            cbxGeocercas.Location = new Point(12, 80);
             cbxGeocercas.Margin = new Padding(3, 2, 3, 2);
             cbxGeocercas.Name = "cbxGeocercas";
             cbxGeocercas.Size = new Size(215, 23);
@@ -129,7 +130,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.backsolo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(988, 508);
+            ClientSize = new Size(770, 508);
             Controls.Add(cbxGeocercas);
             Controls.Add(label5);
             Controls.Add(label2);
