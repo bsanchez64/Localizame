@@ -30,7 +30,6 @@ namespace Localizame.vista
         connection cn = new connection();
         SqlDataAdapter da;
         SqlCommand cmd;
-        DataTable dt;
 
         double LatInicial = 6.207945;
         double LngInicial = -75.5928211;
@@ -303,6 +302,13 @@ namespace Localizame.vista
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             funciones_generales.CerrarSesion();
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            frmGeocercas frmGeocercas = new frmGeocercas();
+            this.Hide();
+            frmGeocercas.ShowDialog();
         }
     }
 }

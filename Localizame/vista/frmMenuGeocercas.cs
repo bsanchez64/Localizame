@@ -96,5 +96,11 @@ namespace Localizame.vista
         {
             this.Hide();
         }
+
+        private void pnlDeleteGeo_Click(object sender, EventArgs e)
+        {
+            frmGeocercasEliminar frmGeocercasEliminar = new frmGeocercasEliminar();
+            frmGeocercasEliminar.Show(this);
+        }
     }
 }

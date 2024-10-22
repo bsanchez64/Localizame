@@ -156,6 +156,7 @@
             pnlDeleteGeo.Name = "pnlDeleteGeo";
             pnlDeleteGeo.Size = new Size(163, 243);
             pnlDeleteGeo.TabIndex = 12;
+            pnlDeleteGeo.Click += pnlDeleteGeo_Click;
             pnlDeleteGeo.MouseLeave += pnlDeleteGeo_MouseLeave;
             pnlDeleteGeo.MouseHover += pnlDeleteGeo_MouseHover;
             // 

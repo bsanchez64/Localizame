@@ -1,4 +1,7 @@
-﻿using Localizame.controlador;
+﻿using GMap.NET.WindowsForms.Markers;
+using GMap.NET.WindowsForms;
+using GMap.NET;
+using Localizame.controlador;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Numerics;
@@ -139,7 +142,6 @@ namespace Localizame.modelo
             return propietarios;
         }
 
-
         public static double ConvertirCoordenada1dg(double coordinate)
         {
             string coordinateString = coordinate.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -176,7 +178,7 @@ namespace Localizame.modelo
 
         public DateTime QuitarHoras(DateTime dateTime)
         {
-            return dateTime.Date; 
+            return dateTime.Date;
         }
 
         public static string[] cargarMarcadores(string placa, DateTime fechaInicial, DateTime fechaFinal)
@@ -219,16 +221,54 @@ namespace Localizame.modelo
             SqlDataReader reader = cmd.ExecuteReader();
             List<string> posiciones = new List<string>();
 
-                while (reader.Read())
-                {
-                    double latitud = Convert.ToDouble(reader["latitud"]);
-                    double longitud = Convert.ToDouble(reader["longitud"]);
-                    posiciones.Add($"{latitud}/ {longitud}");
-                }
-          
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add($"{latitud}/ {longitud}");
+            }
+
             cn.CerrarConexion();
             return posiciones.ToArray();
         }
+
+        public static List<(double latitud, double longitud)> cargarPoligonos(string nombrePoligono)
+        {
+            cmd = new SqlCommand("SELECT * FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
+            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<(double latitud, double longitud)> posiciones = new List<(double, double)>();
+
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add((latitud, longitud));
+            }
+
+            cn.CerrarConexion();
+            return posiciones;
+        }
+
+        public static List<string> obtenerNombresPoligonos()
+        {
+            List<string> nombresPoligonos = new List<string>();
+
+            SqlCommand cmd = new SqlCommand("SELECT DISTINCT nombrePoligono FROM Geocercas", cn.AbrirConexion());
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string nombrePoligono = reader["nombrePoligono"].ToString();
+                nombresPoligonos.Add(nombrePoligono);
+            }
+
+            cn.CerrarConexion();
+
+            return nombresPoligonos;
+        }
+
 
         public static void llenarDataViewGeocercas(DataGridView gridGeocercas, string nombrePoligono)
         {
