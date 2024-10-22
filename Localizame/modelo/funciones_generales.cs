@@ -251,6 +251,25 @@ namespace Localizame.modelo
             return posiciones;
         }
 
+        public static List<(double latitud, double longitud)> cargarPoligonos(string nombrePoligono)
+        {
+            cmd = new SqlCommand("SELECT * FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
+            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<(double latitud, double longitud)> posiciones = new List<(double, double)>();
+
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add((latitud, longitud));
+            }
+
+            cn.CerrarConexion();
+            return posiciones; 
+        }
+
         public static List<string> obtenerNombresPoligonos()
         {
             List<string> nombresPoligonos = new List<string>();
