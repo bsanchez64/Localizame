@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using Localizame.modelo;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Localizame.vista
@@ -21,6 +22,7 @@ namespace Localizame.vista
         public int xClic, yClic;
         public frmUsuariosEditar(int UId)
         {
+            cbxNivel.DropDownStyle = ComboBoxStyle.DropDownList;
             InitializeComponent();
             string[] datos = funciones_generales.buscarEditarUsuario(UId);
             foreach (var dato in datos)

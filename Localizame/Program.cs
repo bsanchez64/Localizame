@@ -9,7 +9,7 @@ namespace Localizame
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmSplash());
+            Application.Run(new frmUsuarioAgregar());
         }
     }
 }

@@ -140,6 +140,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmGeocercasVer";
             Text = "frmGeocercasVer";
+            Load += frmGeocercasVer_Load;
             Click += frmGeocercasVer_Click;
             MouseClick += frmGeocercasVer_MouseClick;
             ResumeLayout(false);

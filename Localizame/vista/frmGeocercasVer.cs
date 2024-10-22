@@ -17,6 +17,7 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Xml;
 using Localizame.controlador;
 using Microsoft.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Localizame.vista
 {
@@ -51,7 +52,7 @@ namespace Localizame.vista
             InitializeComponent();
             CargarGeocercas();
             funciones_generales.getNivel();
-            funciones_generales.getIdUsuario(); 
+            funciones_generales.getIdUsuario();
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.CanDragMap = true;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
@@ -60,6 +61,7 @@ namespace Localizame.vista
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 12;
             gMapControl1.AutoScroll = true;
+            cbxGeocercas.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void CargarGeocercas()
@@ -137,41 +139,46 @@ namespace Localizame.vista
             }
 
             else
+            {
+                markersOverlay.Markers.Clear();
+                string valorCbx1 = cbxGeocercas.SelectedItem.ToString();
+                string[] marcadores1 = funciones_generales.cargarMarcadoresPorID(valorCbx1);
+
+                if (marcadores1.Length > 0)
                 {
-                    markersOverlay.Markers.Clear();
-                    string valorCbx1 = cbxGeocercas.SelectedItem.ToString();
-                    string[] marcadores1 = funciones_generales.cargarMarcadoresPorID(valorCbx1);
+                    GMapOverlay overlay = new GMapOverlay(valorCbx1);
 
-                    if (marcadores1.Length > 0)
+                    List<(double latitud, double longitud)> posiciones = funciones_generales.cargarPoligonosporId(valorCbx1);
+                    List<PointLatLng> puntosPoligono = new List<PointLatLng>();
+
+                    foreach (var (latitud, longitud) in posiciones)
                     {
-                        GMapOverlay overlay = new GMapOverlay(valorCbx1);
+                        GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
+                        overlay.Markers.Add(marker);
 
-                        List<(double latitud, double longitud)> posiciones = funciones_generales.cargarPoligonosporId(valorCbx1);
-                        List<PointLatLng> puntosPoligono = new List<PointLatLng>();
-
-                        foreach (var (latitud, longitud) in posiciones)
-                        {
-                            GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
-                            overlay.Markers.Add(marker);
-
-                            puntosPoligono.Add(new PointLatLng(latitud, longitud));
-                            gMapControl1.Position = new PointLatLng(latitud, longitud);
-                        }
-
-                        GMapPolygon poligono = new GMapPolygon(puntosPoligono, valorCbx1);
-
-                        poligono.Fill = new SolidBrush(Color.FromArgb(50, Color.Blue));
-                        poligono.Stroke = new Pen(Color.Blue, 2);
-
-                        overlay.Polygons.Add(poligono);
-
-                        gMapControl1.Overlays.Add(overlay);
-
-                        gMapControl1.Zoom = -12;
-                        gMapControl1.Refresh();
-                        gMapControl1.Zoom = 12;
+                        puntosPoligono.Add(new PointLatLng(latitud, longitud));
+                        gMapControl1.Position = new PointLatLng(latitud, longitud);
                     }
+
+                    GMapPolygon poligono = new GMapPolygon(puntosPoligono, valorCbx1);
+
+                    poligono.Fill = new SolidBrush(Color.FromArgb(50, Color.Blue));
+                    poligono.Stroke = new Pen(Color.Blue, 2);
+
+                    overlay.Polygons.Add(poligono);
+
+                    gMapControl1.Overlays.Add(overlay);
+
+                    gMapControl1.Zoom = -12;
+                    gMapControl1.Refresh();
+                    gMapControl1.Zoom = 12;
                 }
             }
         }
+
+        private void frmGeocercasVer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
+}

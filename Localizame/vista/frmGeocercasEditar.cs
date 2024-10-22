@@ -17,6 +17,7 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Xml;
 using Localizame.controlador;
 using Microsoft.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Localizame.vista
 {
@@ -90,8 +91,7 @@ namespace Localizame.vista
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 12;
             gMapControl1.AutoScroll = true;
-
-
+            cbxGeocercas.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 
@@ -307,6 +307,11 @@ namespace Localizame.vista
         private void btnAtras_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void frmGeocercasEditar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

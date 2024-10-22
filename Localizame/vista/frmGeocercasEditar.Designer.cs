@@ -260,6 +260,7 @@
             Name = "frmGeocercasEditar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Editar geocercas";
+            Load += frmGeocercasEditar_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridGeocercas).EndInit();
