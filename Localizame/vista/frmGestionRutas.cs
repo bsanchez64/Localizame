@@ -178,7 +178,7 @@ namespace Localizame.vista
                         GMapMarker marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.red_dot);
 
                         marker.ToolTipMode = MarkerTooltipMode.Always;
-                        marker.ToolTipText = string.Format("Ubicacion: \n Latitud: {0} \n Longitud: {1} \n Fecha y hora: {2}", latitud, longitud, fechaHora);
+                        marker.ToolTipText = string.Format("Ubicación: \n Latitud: {0} \n Longitud: {1} \n Fecha y hora: {2}", latitud, longitud, fechaHora);
 
                         markersOverlay.Markers.Add(marker);
                     }
@@ -215,14 +215,69 @@ namespace Localizame.vista
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-         
-                trackZoom.Value = Convert.ToInt32(gMapControl1.Zoom);
-            
+
+            trackZoom.Value = Convert.ToInt32(gMapControl1.Zoom);
+
         }
 
         private void trackZoom_ValueChanged(object sender, EventArgs e)
         {
             gMapControl1.Zoom = trackZoom.Value;
+        }
+
+        private void chkGeocercas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkGeocercas.Checked)
+            {
+                List<string> nombresPoligonos = funciones_generales.obtenerNombresPoligonos();
+
+                foreach (string nombrePoligono in nombresPoligonos)
+                {
+                    GMapOverlay overlay = new GMapOverlay(nombrePoligono);
+
+                    List<(double latitud, double longitud)> posiciones = funciones_generales.cargarPoligonos(nombrePoligono);
+                    List<PointLatLng> puntosPoligono = new List<PointLatLng>();
+
+                    foreach (var (latitud, longitud) in posiciones)
+                    {
+                        GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
+                        overlay.Markers.Add(marker);
+
+                        puntosPoligono.Add(new PointLatLng(latitud, longitud));
+                    }
+
+                    GMapPolygon poligono = new GMapPolygon(puntosPoligono, nombrePoligono);
+
+                    poligono.Fill = new SolidBrush(Color.FromArgb(50, Color.Blue)); 
+                    poligono.Stroke = new Pen(Color.Blue, 2); 
+
+                    overlay.Polygons.Add(poligono);
+
+                    gMapControl1.Overlays.Add(overlay);
+                }
+
+                gMapControl1.Zoom = -12;
+                gMapControl1.Refresh();
+                gMapControl1.Zoom = 12;
+
+            }
+            else
+            {
+                List<string> nombresPoligonos = funciones_generales.obtenerNombresPoligonos();
+                foreach (string nombrePoligono in nombresPoligonos)
+                {
+                    var overlay = gMapControl1.Overlays.FirstOrDefault(o => o.Id == nombrePoligono);
+                    if (overlay != null)
+                    {
+                        overlay.Polygons.Clear();
+                        gMapControl1.Overlays.Remove(overlay);
+                    }
+
+                    gMapControl1.Zoom = -12;
+                    gMapControl1.Refresh();
+                    gMapControl1.Zoom = 12;
+                }
+            }
         }
     }
 }
