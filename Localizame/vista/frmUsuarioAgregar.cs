@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using Localizame.modelo;
 using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Localizame.vista
 {
@@ -21,7 +22,7 @@ namespace Localizame.vista
         public frmUsuarioAgregar()
         {
             InitializeComponent();
-
+            cbxNivel.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

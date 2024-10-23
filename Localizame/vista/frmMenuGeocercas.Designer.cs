@@ -119,6 +119,7 @@
             pnlVerGeocercas.Name = "pnlVerGeocercas";
             pnlVerGeocercas.Size = new Size(150, 243);
             pnlVerGeocercas.TabIndex = 9;
+            pnlVerGeocercas.Click += pnlVerGeocercas_Click;
             pnlVerGeocercas.MouseLeave += pnlVerGeocercas_MouseLeave;
             pnlVerGeocercas.MouseHover += pnlVerGeocercas_MouseHover;
             // 
@@ -156,6 +157,7 @@
             pnlDeleteGeo.Name = "pnlDeleteGeo";
             pnlDeleteGeo.Size = new Size(163, 243);
             pnlDeleteGeo.TabIndex = 12;
+            pnlDeleteGeo.Click += pnlDeleteGeo_Click;
             pnlDeleteGeo.MouseLeave += pnlDeleteGeo_MouseLeave;
             pnlDeleteGeo.MouseHover += pnlDeleteGeo_MouseHover;
             // 

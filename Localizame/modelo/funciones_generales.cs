@@ -125,7 +125,15 @@ namespace Localizame.modelo
         public static List<string> llenarGeocercasEditar()
         {
             List<string> propietarios = new List<string>();
-            cmd = new SqlCommand("SELECT nombrePoligono FROM Geocercas GROUP BY nombrePoligono", cn.AbrirConexion());
+            if (funciones_generales.getNivel() == "administrador")
+            {
+                cmd = new SqlCommand("SELECT nombrePoligono FROM Geocercas GROUP BY nombrePoligono", cn.AbrirConexion());
+            }
+            else
+            {
+                cmd = new SqlCommand("SELECT nombrePoligono FROM Geocercas WHERE idUsuario=@idUsuario GROUP BY nombrePoligono", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@idUsuario", funciones_generales.getIdUsuario());
+            }
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             propietarios.Add("Selecciona una opción");
 
@@ -178,7 +186,7 @@ namespace Localizame.modelo
 
         public DateTime QuitarHoras(DateTime dateTime)
         {
-            return dateTime.Date; 
+            return dateTime.Date;
         }
 
         public static string[] cargarMarcadores(string placa, DateTime fechaInicial, DateTime fechaFinal)
@@ -221,13 +229,34 @@ namespace Localizame.modelo
             SqlDataReader reader = cmd.ExecuteReader();
             List<string> posiciones = new List<string>();
 
-                while (reader.Read())
-                {
-                    double latitud = Convert.ToDouble(reader["latitud"]);
-                    double longitud = Convert.ToDouble(reader["longitud"]);
-                    posiciones.Add($"{latitud}/ {longitud}");
-                }
-          
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add($"{latitud}/ {longitud}");
+            }
+
+            cn.CerrarConexion();
+            return posiciones.ToArray();
+        }
+
+        public static string[] cargarMarcadoresPorID (string nombrePoligono)
+        {
+            string idUsuario = getIdUsuario();
+            SqlCommand cmd = new SqlCommand("SELECT latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono AND idUsuario = @idUsuario", cn.AbrirConexion());
+            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<string> posiciones = new List<string>();
+
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add($"{latitud}/ {longitud}");
+            }
+
             cn.CerrarConexion();
             return posiciones.ToArray();
         }
@@ -248,8 +277,29 @@ namespace Localizame.modelo
             }
 
             cn.CerrarConexion();
-            return posiciones; 
+            return posiciones;
         }
+
+        public static List<(double latitud, double longitud)> cargarPoligonosporId(string nombrePoligono)
+        {
+            string idUsuario = getIdUsuario();
+            cmd = new SqlCommand("SELECT latitud, longitud FROM Geocercas WHERE nombrePoligono = @nombrePoligono AND idUsuario = @idUsuario", cn.AbrirConexion());
+            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<(double latitud, double longitud)> posiciones = new List<(double, double)>();
+
+            while (reader.Read())
+            {
+                double latitud = Convert.ToDouble(reader["latitud"]);
+                double longitud = Convert.ToDouble(reader["longitud"]);
+                posiciones.Add((latitud, longitud));
+            }
+
+            cn.CerrarConexion();
+            return posiciones;
+        }
+
 
         public static List<string> obtenerNombresPoligonos()
         {
