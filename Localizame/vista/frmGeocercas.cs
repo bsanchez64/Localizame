@@ -279,7 +279,7 @@ namespace Localizame.vista
                 cmd.Parameters.AddWithValue("@nombrePoligono", Convert.ToString(row.Cells["Descripción"].Value));
                 cmd.Parameters.AddWithValue("@latitud", latitudInt);
                 cmd.Parameters.AddWithValue("@longitud", longitudInt);
-                cmd.Parameters.AddWithValue("@idUsuario", 1);
+                cmd.Parameters.AddWithValue("@idUsuario", funciones_generales.getIdUsuario());
 
                 filasAfectadas = cmd.ExecuteNonQuery();
             }
