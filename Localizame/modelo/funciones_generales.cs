@@ -289,6 +289,72 @@ namespace Localizame.modelo
 
         }
 
+        public static void informeOperadoresPlaca(DataGridView gridOperadores, string placa, DateTime fechaInicial, DateTime fechaFinal)
+        {
+
+            try
+            {
+                cmd = new SqlCommand(@"WITH Distancias AS (
+                                    SELECT placa, 
+                                           operador AS Operador, 
+                                           latitud, 
+                                           longitud, 
+                                           fechaHora,
+                                           CAST(fechaHora AS DATE) AS fecha,
+                                           geography::Point(latitud, longitud, 4326) AS Point,
+                                           LAG(geography::Point(latitud, longitud, 4326)) OVER (PARTITION BY placa ORDER BY fechaHora) AS PrevPoint,
+                                           LAG(fechaHora) OVER (PARTITION BY placa ORDER BY fechaHora) AS PrevFechaHora
+                                    FROM pasoVehiculos
+                                    WHERE placa = @placa 
+                                      AND fechaHora BETWEEN @fechaInicial AND @fechaFinal)
+
+                                SELECT d.operador AS Operador, 
+                                       CONVERT(VARCHAR(10), d.fecha, 103) AS Fecha,
+                                       COUNT(*) AS 'Total Registros',
+                                       CAST(ROUND(SUM(CASE 
+                                               WHEN d.PrevPoint IS NOT NULL 
+                                               THEN d.Point.STDistance(d.PrevPoint) / 1000.0 
+                                               ELSE 0 
+                                           END), 2) AS VARCHAR(10)) + ' k' AS 'Distancia total recorrida',
+                                       CAST(ROUND(AVG(CASE 
+                                               WHEN d.PrevPoint IS NOT NULL AND DATEDIFF(SECOND, d.PrevFechaHora, d.fechaHora) > 0
+                                               THEN (d.Point.STDistance(d.PrevPoint) / 
+                                                     DATEDIFF(SECOND, d.PrevFechaHora, d.fechaHora)) * 3.6 
+                                               ELSE NULL
+                                           END), 2) AS VARCHAR(10)) + ' km/h' AS 'Velocidad promedio'
+                                FROM Distancias d
+                                GROUP BY d.operador, d.fecha
+                                ORDER BY d.fecha, d.operador;",  cn.AbrirConexion());
+
+                cmd.Parameters.AddWithValue("@placa", placa);
+                cmd.Parameters.AddWithValue("@fechaInicial", fechaInicial);
+                cmd.Parameters.AddWithValue("@fechaFinal", fechaFinal);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gridOperadores.DataSource = dt;
+            }
+            catch (SqlException ex)
+            {
+                // Muestra el error detallado de SQL
+                MessageBox.Show("Error SQL: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                // Muestra cualquier otro error
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Asegura que la conexión siempre se cierra
+                cn.CerrarConexion();
+            }
+
+
+
+        }
+
         public static string[] cargarUltimaPosicion(string placa)
         {
 

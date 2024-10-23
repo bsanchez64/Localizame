@@ -80,7 +80,7 @@ namespace Localizame.vista
                 frmMenuSoftware frmMenuSoftware = new frmMenuSoftware();
                 this.Hide();
                 frmMenuSoftware.ShowDialog();
-                
+
             }
             else
             {
@@ -135,6 +135,11 @@ namespace Localizame.vista
 
         }
 
-
+        private void pnlInformes_MouseClick(object sender, MouseEventArgs e)
+        {
+            frmInformes frmInformes = new frmInformes();
+            this.Hide();
+            frmInformes.ShowDialog();
+        }
     }
 }

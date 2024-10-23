@@ -79,7 +79,7 @@
             lblUserPlat.ForeColor = SystemColors.Control;
             lblUserPlat.Location = new Point(49, 130);
             lblUserPlat.Name = "lblUserPlat";
-            lblUserPlat.Size = new Size(72, 31);
+            lblUserPlat.Size = new Size(58, 25);
             lblUserPlat.TabIndex = 0;
             lblUserPlat.Text = "Perfil";
             // 
@@ -104,7 +104,7 @@
             lblGestion.ForeColor = SystemColors.Control;
             lblGestion.Location = new Point(33, 127);
             lblGestion.Name = "lblGestion";
-            lblGestion.Size = new Size(128, 62);
+            lblGestion.Size = new Size(107, 50);
             lblGestion.TabIndex = 0;
             lblGestion.Text = "Gestión de\r\nRutas";
             lblGestion.TextAlign = ContentAlignment.MiddleCenter;
@@ -130,7 +130,7 @@
             label1.ForeColor = SystemColors.Control;
             label1.Location = new Point(32, 127);
             label1.Name = "label1";
-            label1.Size = new Size(128, 62);
+            label1.Size = new Size(107, 50);
             label1.TabIndex = 0;
             label1.Text = "Gestión de\r\nGeocercas";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -145,6 +145,7 @@
             pnlInformes.Name = "pnlInformes";
             pnlInformes.Size = new Size(164, 251);
             pnlInformes.TabIndex = 7;
+            pnlInformes.MouseClick += pnlInformes_MouseClick;
             pnlInformes.MouseLeave += pnlInformes_MouseLeave;
             pnlInformes.MouseHover += pnlInformes_MouseHover;
             // 
@@ -155,7 +156,7 @@
             label2.ForeColor = SystemColors.Control;
             label2.Location = new Point(36, 144);
             label2.Name = "label2";
-            label2.Size = new Size(110, 31);
+            label2.Size = new Size(92, 25);
             label2.TabIndex = 0;
             label2.Text = "Informes";
             // 
@@ -167,7 +168,7 @@
             lblBienvenido.ForeColor = Color.White;
             lblBienvenido.Location = new Point(57, 131);
             lblBienvenido.Name = "lblBienvenido";
-            lblBienvenido.Size = new Size(149, 37);
+            lblBienvenido.Size = new Size(121, 30);
             lblBienvenido.TabIndex = 8;
             lblBienvenido.Text = "Bienvenido";
             lblBienvenido.Click += lblBienvenido_Click;
