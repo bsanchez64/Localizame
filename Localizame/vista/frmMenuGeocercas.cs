@@ -108,5 +108,11 @@ namespace Localizame.vista
             frmGeocercasVer frmGeocercasVer = new frmGeocercasVer();
             frmGeocercasVer.Show(this);
         }
+
+        private void pnlEditGeocerca_MouseClick(object sender, MouseEventArgs e)
+        {
+            frmGeocercasEditar frmGeocercasEditar = new frmGeocercasEditar();
+            frmGeocercasEditar.Show(this);
+        }
     }
 }

@@ -145,6 +145,7 @@
             pnlEditGeocerca.Name = "pnlEditGeocerca";
             pnlEditGeocerca.Size = new Size(159, 243);
             pnlEditGeocerca.TabIndex = 11;
+            pnlEditGeocerca.MouseClick += pnlEditGeocerca_MouseClick;
             pnlEditGeocerca.MouseLeave += pnlEditGeocerca_MouseLeave;
             pnlEditGeocerca.MouseHover += pnlEditGeocerca_MouseHover;
             // 

@@ -131,9 +131,9 @@
             label3.ForeColor = SystemColors.Control;
             label3.Location = new Point(40, 152);
             label3.Name = "label3";
-            label3.Size = new Size(121, 56);
+            label3.Size = new Size(121, 28);
             label3.TabIndex = 6;
-            label3.Text = "Vehiculos\r\nOperadores";
+            label3.Text = "Operadores";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnAtras

@@ -240,8 +240,8 @@ namespace Localizame.vista
 
                     foreach (var (latitud, longitud) in posiciones)
                     {
-                        GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
-                        overlay.Markers.Add(marker);
+                        //GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(latitud, longitud), GMarkerGoogleType.blue_dot);
+                        //overlay.Markers.Add(marker);
 
                         puntosPoligono.Add(new PointLatLng(latitud, longitud));
                     }

@@ -12,25 +12,22 @@ using System.Windows.Forms;
 
 namespace Localizame.vista
 {
-    public partial class frmInformes1 : Form
+    public partial class frmInformes2 : Form
     {
-
         public string vh;
         public DateTime fechaInicial, fechaFinal;
         public int xClic, yClic;
-
-        public frmInformes1()
+        public frmInformes2()
         {
             InitializeComponent();
             cmbVehiculo.DataSource = funciones_generales.llenardatosCmBox();
-            gridOperadores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridGeocercas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtpFechaInicial.Format = DateTimePickerFormat.Custom;
             dtpFechaInicial.CustomFormat = "dd/MM/yyyy HH:mm";
             dtpFechaInicial.ShowUpDown = true;
             dtpFechaFinal.Format = DateTimePickerFormat.Custom;
             dtpFechaFinal.CustomFormat = "dd/MM/yyyy HH:mm";
             dtpFechaFinal.ShowUpDown = true;
-
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -41,34 +38,13 @@ namespace Localizame.vista
 
             if (vh.IsNullOrEmpty())
             {
-                MessageBox.Show("Debes seleccionar un vehículo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Debe seleccionar un vehiculo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                funciones_generales.informeOperadoresPlaca(gridOperadores, vh, fechaInicial, fechaFinal);
-
+                Geocerca.CargarRutasConGeocercas(gridGeocercas, vh, fechaInicial, fechaFinal);
             }
 
-        }
-
-        private void btnExcel_Click(object sender, EventArgs e)
-        {
-            funciones_generales.ExportarDataGridViewExcel(gridOperadores, "Informe por operadores");
-        }
-
-        private void frmInformes1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left)
-            {
-                xClic = e.X; yClic = e.Y;
-
-            }
-            else
-            {
-                this.Left = this.Left + (e.X);
-                this.Top = this.Top + (e.Y);
-
-            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

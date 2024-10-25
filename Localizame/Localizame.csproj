@@ -15,9 +15,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ClosedXML" Version="0.104.1" />
 		<PackageReference Include="GMap.NET.Core" Version="2.1.7" />
 		<PackageReference Include="GMap.NET.WinForms" Version="2.1.7" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+		<PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
 	</ItemGroup>
 
 	<ItemGroup>

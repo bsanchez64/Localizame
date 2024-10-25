@@ -44,7 +44,7 @@
             btnCerrar.BackgroundImage = Properties.Resources.cerrar;
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatStyle = FlatStyle.Popup;
-            btnCerrar.Location = new Point(955, 14);
+            btnCerrar.Location = new Point(734, 16);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(21, 20);
             btnCerrar.TabIndex = 11;
@@ -73,7 +73,7 @@
             gMapControl1.GrayScaleMode = false;
             gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             gMapControl1.LevelsKeepInMemory = 5;
-            gMapControl1.Location = new Point(12, 72);
+            gMapControl1.Location = new Point(12, 162);
             gMapControl1.MarkersEnabled = true;
             gMapControl1.MaxZoom = 2;
             gMapControl1.MinZoom = 2;
@@ -87,7 +87,7 @@
             gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
             gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(743, 424);
+            gMapControl1.Size = new Size(743, 334);
             gMapControl1.TabIndex = 26;
             gMapControl1.Zoom = 0D;
             // 
@@ -97,7 +97,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 13F);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(415, 11);
+            label2.Location = new Point(330, 16);
             label2.Name = "label2";
             label2.Size = new Size(158, 25);
             label2.TabIndex = 27;
@@ -108,7 +108,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.White;
-            label5.Location = new Point(761, 72);
+            label5.Location = new Point(12, 59);
             label5.Name = "label5";
             label5.Size = new Size(126, 15);
             label5.TabIndex = 32;
@@ -117,7 +117,7 @@
             // cbxGeocercas
             // 
             cbxGeocercas.FormattingEnabled = true;
-            cbxGeocercas.Location = new Point(761, 100);
+            cbxGeocercas.Location = new Point(12, 86);
             cbxGeocercas.Margin = new Padding(3, 2, 3, 2);
             cbxGeocercas.Name = "cbxGeocercas";
             cbxGeocercas.Size = new Size(215, 23);
@@ -129,7 +129,7 @@
             btnEliminar.BackColor = Color.Black;
             btnEliminar.FlatStyle = FlatStyle.Popup;
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(761, 138);
+            btnEliminar.Location = new Point(12, 115);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(215, 23);
@@ -144,7 +144,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.backsolo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(988, 508);
+            ClientSize = new Size(767, 508);
             Controls.Add(btnEliminar);
             Controls.Add(cbxGeocercas);
             Controls.Add(label5);
@@ -155,6 +155,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmGeocercasEliminar";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmGeocercasEliminar";
             Load += frmGeocercasEliminar_Load;
             MouseMove += frmGeocercasEliminar_MouseMove;

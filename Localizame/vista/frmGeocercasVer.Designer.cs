@@ -140,6 +140,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmGeocercasVer";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmGeocercasVer";
             Load += frmGeocercasVer_Load;
             Click += frmGeocercasVer_Click;

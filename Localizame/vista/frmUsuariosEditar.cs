@@ -22,7 +22,7 @@ namespace Localizame.vista
         public int xClic, yClic;
         public frmUsuariosEditar(int UId)
         {
-            cbxNivel.DropDownStyle = ComboBoxStyle.DropDownList;
+            
             InitializeComponent();
             string[] datos = funciones_generales.buscarEditarUsuario(UId);
             foreach (var dato in datos)

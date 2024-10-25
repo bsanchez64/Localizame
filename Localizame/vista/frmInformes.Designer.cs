@@ -58,11 +58,11 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(32, 127);
+            label1.Location = new Point(21, 127);
             label1.Name = "label1";
-            label1.Size = new Size(100, 25);
+            label1.Size = new Size(126, 50);
             label1.TabIndex = 0;
-            label1.Text = "Informe 1";
+            label1.Text = "Informe por \r\noperadores";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnlInforme2
@@ -75,6 +75,7 @@
             pnlInforme2.Name = "pnlInforme2";
             pnlInforme2.Size = new Size(163, 251);
             pnlInforme2.TabIndex = 8;
+            pnlInforme2.MouseClick += pnlInforme2_MouseClick;
             pnlInforme2.MouseLeave += pnlInforme2_MouseLeave;
             pnlInforme2.MouseHover += pnlInforme2_MouseHover;
             // 
@@ -85,9 +86,9 @@
             label2.ForeColor = SystemColors.Control;
             label2.Location = new Point(32, 127);
             label2.Name = "label2";
-            label2.Size = new Size(107, 50);
+            label2.Size = new Size(102, 50);
             label2.TabIndex = 0;
-            label2.Text = "Gestión de\r\nGeocercas";
+            label2.Text = "Ruta VS.\r\nGeocercas";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnCerrar

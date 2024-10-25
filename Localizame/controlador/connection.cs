@@ -7,15 +7,22 @@ namespace Localizame.controlador
     {
 
         //static private string CadenaConexion = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Coord. de sistemas\source\repos\Localizame\Localizame\dblocalizame.mdf;Integrated Security=True;Connect Timeout=30;";
-        static private string CadenaConexion = @"Server=35.188.146.181;Database=localizame;User Id=sqlserver;Password=l0calizame2023;TrustServerCertificate=true;";
+        private static string CadenaConexion = @"Server=35.188.146.181;Database=localizame;User Id=sqlserver;Password=l0calizame2023;TrustServerCertificate=true;MultipleActiveResultSets=True;";
 
         private SqlConnection Conexion = new SqlConnection(CadenaConexion);
 
         public SqlConnection AbrirConexion()
         {
-            if (Conexion.State == ConnectionState.Closed)
-                Conexion.Open();
-            return Conexion;
+            SqlConnection conexion = new SqlConnection(CadenaConexion);
+            try
+            {
+                conexion.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al abrir la conexión: " + ex.Message);
+            }
+            return conexion;
         }
 
         public void CerrarConexion()

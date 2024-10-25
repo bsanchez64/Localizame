@@ -72,5 +72,11 @@ namespace Localizame.vista
             frmInformes1 frmInformes1 = new frmInformes1();
             frmInformes1.ShowDialog();
         }
+
+        private void pnlInforme2_MouseClick(object sender, MouseEventArgs e)
+        {
+            frmInformes2 frmInformes2 = new frmInformes2();
+            frmInformes2.ShowDialog();
+        }
     }
 }

@@ -109,7 +109,7 @@
             // cmbVehiculo
             // 
             cmbVehiculo.FormattingEnabled = true;
-            cmbVehiculo.Items.AddRange(new object[] { "Selecciona una opcion", "EQW508", "STC463" });
+            cmbVehiculo.Items.AddRange(new object[] { "Selecciona una opcion" });
             cmbVehiculo.Location = new Point(13, 75);
             cmbVehiculo.Name = "cmbVehiculo";
             cmbVehiculo.Size = new Size(217, 23);
@@ -138,9 +138,11 @@
             btnAtras.TabIndex = 24;
             btnAtras.Text = "< Volver atrás";
             btnAtras.UseVisualStyleBackColor = false;
+            btnAtras.Click += btnAtras_Click;
             // 
             // btnCerrar
             // 
+            btnCerrar.BackColor = SystemColors.ButtonFace;
             btnCerrar.BackgroundImage = Properties.Resources.cerrar;
             btnCerrar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCerrar.FlatAppearance.BorderSize = 0;
@@ -150,7 +152,8 @@
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(21, 20);
             btnCerrar.TabIndex = 23;
-            btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // gridOperadores
             // 
@@ -186,6 +189,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
+            BackgroundImage = Properties.Resources.backsolo;
             ClientSize = new Size(877, 381);
             Controls.Add(btnExcel);
             Controls.Add(gridOperadores);
@@ -199,9 +203,12 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(cmbVehiculo);
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmInformes1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Informes";
+            MouseMove += frmInformes1_MouseMove;
             ((System.ComponentModel.ISupportInitialize)gridOperadores).EndInit();
             ResumeLayout(false);
             PerformLayout();

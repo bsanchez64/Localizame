@@ -8,6 +8,9 @@ using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using ClosedXML.Excel;
+using System.IO;
+using System.Globalization;
 
 namespace Localizame.modelo
 {
@@ -263,8 +266,19 @@ namespace Localizame.modelo
 
         public static List<(double latitud, double longitud)> cargarPoligonos(string nombrePoligono)
         {
-            cmd = new SqlCommand("SELECT * FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
-            cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+
+            if (getNivel() == "administrador")
+            {
+                cmd = new SqlCommand("SELECT * FROM Geocercas WHERE nombrePoligono = @nombrePoligono", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+            }
+            else
+            {
+                cmd = new SqlCommand("SELECT * FROM Geocercas WHERE nombrePoligono = @nombrePoligono AND idUsuario=@idUsuario ", cn.AbrirConexion());
+                cmd.Parameters.AddWithValue("@nombrePoligono", nombrePoligono);
+                cmd.Parameters.AddWithValue("@idUsuario", getIdUsuario());
+
+            }
 
             SqlDataReader reader = cmd.ExecuteReader();
             List<(double latitud, double longitud)> posiciones = new List<(double, double)>();
@@ -345,36 +359,54 @@ namespace Localizame.modelo
             try
             {
                 cmd = new SqlCommand(@"WITH Distancias AS (
-                                    SELECT placa, 
-                                           operador AS Operador, 
-                                           latitud, 
-                                           longitud, 
-                                           fechaHora,
-                                           CAST(fechaHora AS DATE) AS fecha,
-                                           geography::Point(latitud, longitud, 4326) AS Point,
-                                           LAG(geography::Point(latitud, longitud, 4326)) OVER (PARTITION BY placa ORDER BY fechaHora) AS PrevPoint,
-                                           LAG(fechaHora) OVER (PARTITION BY placa ORDER BY fechaHora) AS PrevFechaHora
-                                    FROM pasoVehiculos
-                                    WHERE placa = @placa 
-                                      AND fechaHora BETWEEN @fechaInicial AND @fechaFinal)
+                                        SELECT placa, 
+                                               operador AS Operador, 
+                                               latitud, 
+                                               longitud, 
+                                               fechaHora,
+                                               CAST(fechaHora AS DATE) AS fecha,
+                                               geography::Point(latitud, longitud, 4326) AS Point,
+                                               LAG(geography::Point(latitud, longitud, 4326)) OVER (PARTITION BY placa ORDER BY fechaHora) AS PrevPoint,
+                                               LAG(fechaHora) OVER (PARTITION BY placa ORDER BY fechaHora) AS PrevFechaHora
+                                        FROM pasoVehiculos
+                                        WHERE placa = @placa 
+                                          AND fechaHora BETWEEN @fechaInicial AND @fechaFinal
+                                    )
 
-                                SELECT d.operador AS Operador, 
-                                       CONVERT(VARCHAR(10), d.fecha, 103) AS Fecha,
-                                       COUNT(*) AS 'Total Registros',
-                                       CAST(ROUND(SUM(CASE 
-                                               WHEN d.PrevPoint IS NOT NULL 
-                                               THEN d.Point.STDistance(d.PrevPoint) / 1000.0 
-                                               ELSE 0 
-                                           END), 2) AS VARCHAR(10)) + ' k' AS 'Distancia total recorrida',
-                                       CAST(ROUND(AVG(CASE 
-                                               WHEN d.PrevPoint IS NOT NULL AND DATEDIFF(SECOND, d.PrevFechaHora, d.fechaHora) > 0
-                                               THEN (d.Point.STDistance(d.PrevPoint) / 
-                                                     DATEDIFF(SECOND, d.PrevFechaHora, d.fechaHora)) * 3.6 
-                                               ELSE NULL
-                                           END), 2) AS VARCHAR(10)) + ' km/h' AS 'Velocidad promedio'
-                                FROM Distancias d
-                                GROUP BY d.operador, d.fecha
-                                ORDER BY d.fecha, d.operador;",  cn.AbrirConexion());
+                                    -- Subconsulta para calcular el tiempo trabajado
+                                    , TiempoTrabajado AS (
+                                        SELECT operador, 
+                                               CAST(fechaHora AS DATE) AS fecha,
+                                               DATEDIFF(SECOND, MIN(fechaHora), MAX(fechaHora)) AS segundosTrabajados
+                                        FROM pasoVehiculos
+                                        WHERE placa = @placa 
+                                          AND fechaHora BETWEEN @fechaInicial AND @fechaFinal
+                                        GROUP BY operador, CAST(fechaHora AS DATE)
+                                    )
+
+                                    -- Consulta principal que junta todo
+                                    SELECT d.operador AS Operador, 
+                                           CONVERT(VARCHAR(10), d.fecha, 103) AS Fecha,
+                                           COUNT(*) AS 'Total Registros',
+                                           CAST(ROUND(SUM(CASE 
+                                                   WHEN d.PrevPoint IS NOT NULL 
+                                                   THEN d.Point.STDistance(d.PrevPoint) / 1000.0 
+                                                   ELSE 0 
+                                               END), 2) AS VARCHAR(10)) + ' km' AS 'Distancia total recorrida',
+                                           CAST(ROUND(AVG(CASE 
+                                                   WHEN d.PrevPoint IS NOT NULL AND DATEDIFF(SECOND, d.PrevFechaHora, d.fechaHora) > 0
+                                                   THEN (d.Point.STDistance(d.PrevPoint) / 
+                                                         DATEDIFF(SECOND, d.PrevFechaHora, d.fechaHora)) * 3.6 
+                                                   ELSE NULL
+                                               END), 2) AS VARCHAR(10)) + ' km/h' AS 'Velocidad promedio',
+                                           -- Integrar el cálculo de tiempo trabajado de la subconsulta
+                                           RIGHT('0' + CAST(tt.segundosTrabajados / 3600 AS VARCHAR(2)), 2) 
+                                           + ':' + RIGHT('0' + CAST((tt.segundosTrabajados % 3600) / 60 AS VARCHAR(2)), 2) 
+                                           + ' h' AS 'Tiempo trabajado'
+                                    FROM Distancias d
+                                    JOIN TiempoTrabajado tt ON d.operador = tt.operador AND d.fecha = tt.fecha
+                                    GROUP BY d.operador, d.fecha, tt.segundosTrabajados
+                                    ORDER BY d.fecha, d.operador;",  cn.AbrirConexion());
 
                 cmd.Parameters.AddWithValue("@placa", placa);
                 cmd.Parameters.AddWithValue("@fechaInicial", fechaInicial);
@@ -571,6 +603,76 @@ namespace Localizame.modelo
             return editar.ToArray();
         }
 
+
+        public static void ExportarDataGridViewExcel(DataGridView grd, string nombreArchivo)
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Usuarios");
+
+                // Cabeceras
+                for (int i = 1; i < grd.Columns.Count + 1; i++)
+                {
+                    worksheet.Cell(1, i).Value = grd.Columns[i - 1].HeaderText;
+                }
+
+                // Valores
+                for (int i = 0; i < grd.Rows.Count - 1; i++)
+                {
+                    for (int j = 0; j < grd.Columns.Count; j++)
+                    {
+                        worksheet.Cell(i + 2, j + 1).Value = grd.Rows[i].Cells[j].Value?.ToString();
+                    }
+                }
+
+                // Guardar archivo Excel
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "Archivos de Excel|*.xlsx",
+                    Title = "Guardar archivo Excel",
+                    FileName = nombreArchivo + ".xlsx"
+                };
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (FileStream stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        workbook.SaveAs(stream);
+                    }
+
+                    MessageBox.Show("Archivo Excel guardado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+        }
+
+        public static double ConvertirConPunto(string numero)
+        {
+            try
+            {
+                numero = numero.Replace(',', '.');
+                string[] partes = numero.Split('.');
+                if (partes.Length == 2)
+                {
+                    string numeroUnido = partes[0] + "." + partes[1];
+                    double resultado = double.Parse(numeroUnido, CultureInfo.InvariantCulture);
+                    return resultado;
+                }
+                else if (partes.Length == 1)
+                {
+                    return double.Parse(partes[0], CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    throw new FormatException("El número tiene un formato incorrecto.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al convertir: {ex.Message}");
+                return 0;
+            }
+        }
 
 
 
